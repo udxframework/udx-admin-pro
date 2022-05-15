@@ -1,0 +1,36 @@
+﻿@namespace Udx.Cms.App.Components
+<Menu Mode="MenuMode.Inline" DefaultSelectedKeys=@(new[]{MenuKey}) >
+   @menuItemTemplate((_categoryTree, false))
+</Menu>
+@code
+{
+    static readonly RenderFragment<CmsCategoryTree> title= menuItem => @<span>
+                                                                        @if (!string.IsNullOrEmpty(menuItem.Icon))
+                                                                        {
+                                                                            <Icon Type="@menuItem.Icon" Theme="outline" />
+                                                                        }
+                                                                        <span>@menuItem.Name</span>
+                                                                    </span>;
+
+    static readonly RenderFragment<(IEnumerable<CmsCategoryTree> items, bool isChildren)> menuItemTemplate = context =>
+        @<Template>
+            @if (context.items != null)
+            {
+                @foreach (var menuItem in context.items)
+                {
+                    if (menuItem.Items.Any())
+                    {
+                        <SubMenu  TitleTemplate="@title(menuItem)" Key="@menuItem.Id">
+                            @menuItemTemplate((menuItem.Items, true))
+                        </SubMenu>
+                    }  
+                    else
+                    {                    
+                        <MenuItem Key="@menuItem.Id" RouterLink="@GetLink(menuItem.Id)" RouterMatch="NavLinkMatch.All">                          
+                                @title(menuItem)
+                        </MenuItem>
+                    }                 
+                }
+            }
+        </Template>;
+}

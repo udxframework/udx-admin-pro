@@ -1,0 +1,41 @@
+﻿@namespace Udx.Admin.App.Pages.Modules
+@page "/admin/modules-list"
+@inherits  UdxComponentBase
+  <ErrorBoundary> 
+      <Spin Spinning=_loading> 
+       <Layout>
+          <Content>
+               <PageHeader Class="site-page-header">           
+        <!--avatar-->
+    <PageHeaderAvatar>
+         <Avatar Style="background-color: #00a2ae" Icon="apartment" />
+    </PageHeaderAvatar>
+    <!--title-->
+    <PageHeaderTitle>模块管理</PageHeaderTitle>
+
+    <!--subtitle-->
+    <PageHeaderSubtitle>系统模块设置</PageHeaderSubtitle>
+        <!--extra-->
+        <PageHeaderExtra>
+            <div class="udx-page-header-extra-fixed">
+                   
+                    </div>
+                       
+        </PageHeaderExtra>
+        <PageHeaderContent >
+           
+        </PageHeaderContent>
+
+     </PageHeader>
+              </Content>
+<Layout>
+<Sider Theme="SiderTheme.Light" Style="background: #fff;overflow:auto;height:calc(100vh - 200px);max-width:250px"> 
+      <ModuleEditTree OnTreeSelect="OnTreeSelectAsync" />
+ </Sider>
+<Content Style="background: #fff;padding: 2px 5px 2px 5px;width:calc(100%)">      
+       <h4> @_selectedTreeData?.Name</h4>      
+ </Content>
+</Layout>
+</Layout> 
+</Spin>
+</ErrorBoundary> 

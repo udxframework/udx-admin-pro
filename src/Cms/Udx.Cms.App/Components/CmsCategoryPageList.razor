@@ -1,0 +1,19 @@
+﻿@namespace Udx.Cms.App.Components
+ <Tree TItem="CmsCategoryTree" Style="width:100%;" 
+ SearchValue="@searchKey"
+  MatchedClass="site-tree-search-value"
+             DataSource="_categoryTree"
+             TitleExpression="x => x.DataItem.Name"
+             ChildrenExpression="x => x.DataItem.Items"
+             KeyExpression="x => x.DataItem.Id"
+             IsLeafExpression="x => !x.DataItem.Items.Any()"  
+             TitleTemplate ="titleTemplate"
+             OnSelect="OnSelectAsync"
+             DefaultExpandParent
+             >
+</Tree>
+@code
+{
+    static  RenderFragment<TreeNode<CmsCategoryTree>> titleTemplate=content=>
+    @<a  >@content.Title</a>;
+}

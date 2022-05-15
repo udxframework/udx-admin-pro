@@ -1,0 +1,61 @@
+﻿@namespace Udx.Admin.Components
+@using AntDesign;
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using Microsoft.AspNetCore.WebUtilities
+@using System.Net
+@inject NavigationManager Navigation
+  <Dropdown 
+    Style="display: inherit; width: inherit;"
+    OverlayClassName="container">
+    <Overlay>
+       <Menu Class="menu" Mode=MenuMode.Horizontal> 
+       @if(_user!=null){
+
+           <MenuItem Key="setting:1">您好, @_user.Name</MenuItem>
+           <MenuItem Key="setting" RouterLink="/admin/home"><Icon Type="home"/>管理首页</MenuItem>
+           <MenuItem Key="setting" RouterLink="/admin/profiles-list"><Icon Type="setting"/>个人设置</MenuItem>
+           <MenuDivider />
+           <MenuItem Key="SignOut" OnClick="OnSignIn"><Icon Type="logout" Theme="outline"></Icon>退出</MenuItem>
+        }
+        else
+         {
+           <MenuItem Key="setting:1">您好, 请先登录！</MenuItem>
+           <MenuDivider />
+           <MenuItem Key="SignIn"  OnClick="OnSignIn"><Icon Type="login" Theme="outline"></Icon>登录</MenuItem>
+          }
+     </Menu>
+    </Overlay>
+    <Unbound>          
+            <span @ref="@context.Current" class="action account">
+                @*<Avatar Size="small" Class="avatar" Src="images/UserProfile.svg" Alt="avatar" />*@
+            <Icon Type="user"/>
+            <span class="name anticon">@(_user!=null?_user.Name:"游客~")</span>
+            
+            </span>
+    </Unbound>
+</Dropdown>
+@code{   
+    AuthUser _user;
+    protected override async Task OnInitializedAsync()
+    {
+        _user =await identityUserState.GetAuthUser();
+    }
+    async Task OnSignIn(MouseEventArgs args)
+    {
+
+        string returnUrl = WebUtility.UrlEncode(NavigationManager.Uri);
+        await identityUserState.LogoutAsync();
+
+        Navigation.NavigateTo($"/account/login",true);
+    }
+    void OnSignOut(MouseEventArgs args)
+    {   
+        string returnUrl = WebUtility.UrlEncode(NavigationManager.Uri);
+        Navigation.NavigateTo($"/account/logout",true);
+    }
+     protected  void OnLogin()
+    {        
+        NavigationManager.NavigateTo("/account/login",true);
+    }
+}

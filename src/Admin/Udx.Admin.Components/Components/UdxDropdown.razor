@@ -1,0 +1,65 @@
+﻿@namespace Udx.Admin.Components
+@typeparam TItem
+@typeparam TItemValue
+@inherits UdxComponentBase
+
+<Dropdown @ref="_dropdown" Visible="Visible" OnVisibleChange="OnVisibleChange" Trigger="@(new Trigger[] { AntDesign.Trigger.Click })" Style="width:100%;user-select: text;">
+    <Overlay>
+        <div @onmouseleave="OnMouseLeave">
+            @if (!ReadOnly)
+            {
+                @if (ContentTemplate != null)
+                {
+                    @ContentTemplate
+                }
+                else
+                {
+                    <div class="down-menu">
+                        <Menu Class="" Style="min-width:120px;">
+                            @foreach (var item in Items)
+                            {
+                                <MenuItem OnClick="_e=> OnSelectClick(item)">
+                                    @(_getLabel==null? item.ToString() :_getLabel (item))
+                                </MenuItem>
+                            }
+                        </Menu>
+                    </div>
+                }
+            }
+        </div>
+    </Overlay>
+    <ChildContent>
+        @if (ChildTemplate != null)
+        {
+            @ChildTemplate
+        }
+        else
+        {
+            <div class="udx-dropdown-item">
+
+                <Button Class="udx-button-primary" Icon="@Icon" OnClick="@IconClick" Style="@_iconVisible"></Button>
+                <div style="padding: 2px 5px ; float:left; ">
+
+                    <div title="@_value" class="@_styleValue">
+                        @if (valueTemplate != null)
+                        {
+                            @valueTemplate
+                        }
+                        else
+                        {
+                            @_value
+                        }
+
+                    </div>
+                    <div class="@_stylePlaceholder">
+                        @Placeholder
+                    </div>
+                </div>
+                @if (!ReadOnly && !AllowClear)
+                {
+                    <Button Class="@_styleClose" Icon="Close" OnClick="@OnDelClickAsync"></Button>
+                }
+            </div>
+        }
+    </ChildContent>
+</Dropdown>

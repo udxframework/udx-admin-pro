@@ -1,0 +1,46 @@
+﻿@namespace Udx.Cms.App.Pages.Cms
+@inherits  ComponentBase
+@layout CmsViewLayout
+@page "/cms/list/{Id?}"
+ @attribute [ReuseTabsPage(Title="cms",Ignore=true)]
+ @code{
+RenderFragment authorRender(string authorImgUrl) =>@<Avatar Src="@authorImgUrl"></Avatar>;
+RenderFragment coverRender(string coverImgUrl) =>@<img width="272" alt="logo" src="@coverImgUrl" />;
+RenderFragment<(string icon, string text)> iconText = context =>
+    @<Template>
+        <Space>
+            <SpaceItem><Icon Type="@context.icon" /></SpaceItem>
+            <SpaceItem>@context.text</SpaceItem>
+        </Space>
+    </Template> ;
+}
+<ErrorBoundary>
+ <PageTitle>@(AppSetting.UdxSettings.SiteTitle)-文档分类</PageTitle>
+ <Row Style="padding:0 5px 0 5px">
+<Col Span="24" >
+    <AntList DataSource="@_cmsContentqueryResponse.Data" ItemLayout="@ListItemLayout.Horizontal">
+    <ChildContent Context="context">
+        <ListItem Class="udx-hover">
+            <div><img style="border:1px;padding:5px 10px 2px 5px;width:300px;height:128px;object-fit:cover;display:block" alt="logo" src='@context.CoverImgUrl??"https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"' /></div>
+            <ListItemMeta Description="@context.Author" > 
+                <TitleTemplate>
+                      <Title Level="4"><a href="@($"/cms/view/{context.Id}")" target="_blank"><b>@context.Title</b></a><br/></Title>
+                      <Paragraph>@context.Summary</Paragraph>
+                     <Paragraph> <Space>
+                          <SpaceItem>发布@@ @context.CreatedTime</SpaceItem>
+                         <SpaceItem><Text Code>@(context.Author==null?"Udx":context.Author)</Text></SpaceItem>    
+                         <SpaceItem><Icon Type="fire" /></SpaceItem><SpaceItem>@context.BrowseCount</SpaceItem> </Space>
+                      <Space><SpaceItem><Icon Type="like" /></SpaceItem><SpaceItem>@context.LikeCount</SpaceItem> </Space>
+                      <Space><SpaceItem><Icon Type="message" /></SpaceItem><SpaceItem>@context.CommentCount</SpaceItem> </Space></Paragraph>
+                </TitleTemplate>
+            </ListItemMeta>             
+        </ListItem>
+    </ChildContent>
+    <Footer>
+        <CmsPager Model="@_searchModel"></CmsPager>
+    </Footer>
+</AntList>   
+</Col>
+
+</Row>
+</ErrorBoundary>

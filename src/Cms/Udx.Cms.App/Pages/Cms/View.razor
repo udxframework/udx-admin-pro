@@ -1,0 +1,29 @@
+﻿@namespace Udx.Cms.App.Pages.Cms
+@layout CmsViewLayout
+@inherits  ComponentBase
+@page "/cms/view/{Id}"
+
+ @attribute [ReuseTabsPage(Title="cms",Ignore=true)]
+<ErrorBoundary>
+    <article style="padding:10px;width:90%;">
+       @if(string.IsNullOrEmpty(_cmsModel.Id)){<Empty />} 
+       else{
+      <Title Style="text-align:center">@_cmsModel.Title</Title>
+      <Divider Plain></Divider>
+      <Paragraph > <CmsPreview Markdown="@_cmsModel.Contents" Width="90%"></CmsPreview></Paragraph><br/>
+      <Text >@(_cmsModel.Reference==null?"":$"引用:{_cmsModel.Reference}")</Text> <br/><br/>
+       <Space>
+             <SpaceItem>发布@@ @_cmsModel.CreatedTime</SpaceItem>
+             <SpaceItem><Text Code>@(_cmsModel.Author==null?"Udx":_cmsModel.Author)</Text></SpaceItem>    
+            <SpaceItem><Icon Type="fire" /></SpaceItem>
+            <SpaceItem>@_cmsModel.BrowseCount</SpaceItem>
+            <SpaceItem></SpaceItem>
+            <SpaceItem><Icon Type="like" /></SpaceItem>
+            <SpaceItem>@_cmsModel.LikeCount</SpaceItem>
+            <SpaceItem></SpaceItem>
+            <SpaceItem><Icon Type="message" /></SpaceItem>
+            <SpaceItem>@_cmsModel.CommentCount</SpaceItem>
+        </Space>
+        }
+    </article>
+</ErrorBoundary>

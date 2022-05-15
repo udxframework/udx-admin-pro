@@ -1,0 +1,20 @@
+﻿@namespace Udx.Cms.App.Components
+<Search @bind-Value="@searchKey" Placeholder="Search.." />
+ <Tree TItem="CmsCategoryTree" Style="width:100%;" 
+  MatchedClass="site-tree-search-value"
+  SearchValue="@searchKey"
+             DataSource="_categoryTree"
+             TitleExpression="x => x.DataItem.Name"
+             ChildrenExpression="x => x.DataItem.Items"
+             KeyExpression="x => x.DataItem.Id"
+             IsLeafExpression="x => !x.DataItem.Items.Any()"  
+             TitleTemplate ="titleTemplate"
+             OnSelect="OnSelectAsync"
+             DefaultExpandParent
+             >
+</Tree>
+@code
+{
+    static  RenderFragment<TreeNode<CmsCategoryTree>> titleTemplate=content=>
+    @<a  >@content.Title</a>;
+}

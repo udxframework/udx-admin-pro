@@ -1,0 +1,96 @@
+﻿@namespace Udx.Admin.App.Pages.Configs
+@inherits  UdxComponentBase
+@page "/admin/configs-list"
+ <ErrorBoundary> 
+      <Layout>
+          <Content>
+               <PageHeader Class="site-page-header">           
+        <!--avatar-->
+    <PageHeaderAvatar>
+         <Avatar Style="background-color: #00a2ae" Icon="deployment-unit" />
+    </PageHeaderAvatar>
+    <!--title-->
+    <PageHeaderTitle>配置中心</PageHeaderTitle>
+
+    <!--subtitle-->
+    <PageHeaderSubtitle>配置明细设置</PageHeaderSubtitle>
+        <!--extra-->
+        <PageHeaderExtra>
+            <div class="udx-page-header-extra-fixed">
+                    @if (RuleHelper.GetAction("新增"))
+                    {
+                        <Button Icon="plus" OnClick="OnAddDetailClick">增行</Button>
+                    }
+                    @if (RuleHelper.GetAction("保存"))
+                    {
+                        <Button Icon="save" OnClick="OnSaveClick">保存</Button>
+                    }
+                    </div>
+                       
+        </PageHeaderExtra>
+        <PageHeaderContent>
+            @_selectedTreeData?.Name
+        </PageHeaderContent>
+
+     </PageHeader>
+              </Content>
+<Layout>
+<Sider Theme="SiderTheme.Light" Style="background: #fff;overflow:auto;height:calc(100vh - 250px);"> 
+    <ConfigEditTree OnTreeSelect="OnTreeSelectAsync" />
+ </Sider>
+<Content Style="background: #fff;padding: 2px 5px 2px 5px;width:calc(100%)">    
+
+          <h4>@_selectedTreeData?.Name</h4> 
+          
+          <Table 
+             @ref="table"
+                   TItem="ConfigDetailModel"
+                   DataSource="@_configDetailList"
+                   Bordered=@true Size=@TableSize.Middle
+                   HidePagination
+                   >
+                <Column Title="ID" @bind-Field="context.Id" Hidden="true"  Width="100px">             
+                </Column>
+               <Column Title="ConfigId" @bind-Field="context.ConfigId" Hidden="true"  Width="100px">
+                </Column>
+                <Column Title="配置名称" TData="string" Width="250px">
+                       <Input Type="text" @bind-Value="context.ConfigDetailTitle"  AutoFocus  DebounceMilliseconds=1000/>                        
+                </Column>
+                 <Column Title="配置Key" TData="string" Width="200px">
+                       <Input Type="text" @bind-Value="context.ConfigDetailKey"   DebounceMilliseconds=1000/>                        
+                </Column>
+                    <Column Title="配置Value" TData="string"  Fixed="Left" Width="300px">
+                       <Input Type="text" @bind-Value="context.ConfigDetailValue"   DebounceMilliseconds=1000/>                        
+                </Column>
+                  <Column Title="排序" TData="decimal" Width="100px">
+                       <Input Type="text" @bind-Value="context.Sort"   DebounceMilliseconds=1000/>                        
+                </Column>
+                <Column Title="状态" TData="string"  Width="120px">
+                      <SimpleSelect @bind-Value="@context.Status" DefaultValue="启用" >
+                    <SelectOptions>
+                        <SimpleSelectOption Value="启用" Label="启用"></SimpleSelectOption>
+                        <SimpleSelectOption Value="禁用" Label="禁用"></SimpleSelectOption>
+                    </SelectOptions>
+                </SimpleSelect>                      
+                </Column>
+                <Column Title="描述" Ellipsis  TData="string" >
+                       <Input Type="text" @bind-Value="context.Description"  DebounceMilliseconds=1000 />                        
+                </Column> 
+                <ActionColumn Title="操作" Width="150" >
+                     @if (RuleHelper.GetAction("删除"))
+                    {
+                        <Popconfirm Title="确定要删除吗?"
+                        OnConfirm="()=> OnDeteteDetailClick(context)"
+                        OkText="确定"                        
+                        CancelText="取消">               
+                        <Button Type="@ButtonType.Link" >删除</Button>
+                      </Popconfirm>
+                    }
+                    </ActionColumn>
+                
+           </Table> 
+
+    </Content>
+</Layout>
+</Layout>
+</ErrorBoundary>  

@@ -1,0 +1,20 @@
+﻿@namespace Udx.Cms.App.Pages.Contents
+@layout CmsViewLayout
+@inherits  UdxComponentBase
+@page "/cms/preview/{Id}"
+<PageTitle>@_cmsModel.Title</PageTitle>
+<Row Style="padding:0 5px 0 5px">
+<Col Span="24" >
+     <PageHeader>          
+         <PageHeaderTitle>
+           <div style="text-align:center">@_cmsModel.Title</div>  
+          </PageHeaderTitle>
+         <PageHeaderContent >                 
+                 <CmsPreview Markdown="@_cmsModel.Contents" Width="90%"></CmsPreview>
+         </PageHeaderContent >  
+      <PageHeaderFooter>
+           
+      </PageHeaderFooter>
+     </PageHeader>
+</Col> 
+</Row>

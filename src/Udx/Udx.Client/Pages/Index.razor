@@ -1,0 +1,35 @@
+﻿@page "/"
+@using AntDesign;
+@using Udx.Configs
+@layout Udx.Admin.Components.SiteLayout
+ @attribute [ReuseTabsPage(Title="Udx",Ignore=true)]
+ <div class="site-content">  
+     <Title>提升协作效率，助力团队成长</Title>
+<h2>让团队轻松协作，无缝沟通</h2>
+<h2>提升协作效率，助力团队成长</h2>
+<h2>一站式服务，全方位解决协作与研发痛点</h2>
+<h2>贯穿敏捷研发生命周期，帮助团队敏捷迭代，小步快跑</h2>
+<br/><br/>
+<a href="/account/login">
+<Button Type="@ButtonType.Primary" Icon="@IconType.Outline.UserAdd" Size="@ButtonSize.Large" Shape="@ButtonShape.Round"  >立即登录</Button>
+</a><br/><br/>
+ <img src="/images/home-banner-2.png">
+</div>   
+<style>
+    .site {
+    background: #fff;
+    padding: 24px;
+}
+.site-content {
+    font-family: "official",Arial,"Microsoft Yahei","Helvetica Neue",Helvetica Neue,Helvetica,Lantinghei SC,Hiragino Sans GB,sans-serif;
+    background: #fff;
+    padding: 50px;
+    min-height: 680px;
+    align-content: center;
+   position:relative;vertical-align:middle;
+   background: url(/images/bg.png) #fff center top no-repeat;
+    background-size: 100% auto;
+    text-align:center;
+}
+
+</style>

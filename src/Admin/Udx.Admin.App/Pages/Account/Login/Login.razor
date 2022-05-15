@@ -1,0 +1,59 @@
+﻿@namespace Udx.Admin.App.Pages.Account
+@layout SiteLayout
+@using Udx.Admin.App.Shared
+@using Udx.Admin.Models
+@page "/account/login"
+ @attribute [ReuseTabsPage(Title="用户登录",Ignore=true)]
+ <PageTitle>@(AppSetting.UdxSettings.SiteTitle)-用户登录</PageTitle>
+<div class="page-account page-account-login">  
+    
+        <div class="page-account-container"> <Spin Spinning=Loading  Tip="正在登录..."> 
+      <Card Title=@("用户登录")>
+             <Form Model="@_model" OnFinish="HandleSubmit">
+            <FormItem>
+                <AntDesign.Input Placeholder="用户名" Size="large" @bind-Value="@context.UserName" DebounceMilliseconds=1000>
+                    <Prefix><Icon Type="user" /></Prefix>
+                </AntDesign.Input>
+            </FormItem>
+            <FormItem>
+                <AntDesign.Input Placeholder="密码" Size="large" @bind-Value="@context.Password" Type="password"  DebounceMilliseconds=1000>
+                    <Prefix><Icon Type="lock" /></Prefix>
+                </AntDesign.Input>
+            </FormItem>
+            <FormItem>
+                <Button Type="primary"  HtmlType="submit" Class="submit" Size="large" Block>登&nbsp;录</Button>
+                <AntDesign.Tooltip>@context.MessageInfo</AntDesign.Tooltip>@*
+                <br />
+                <Button Type="link"  OnClick="GotoRegister" Block>注册新账号</Button>*@
+            </FormItem>
+        </Form>
+       </Card> 
+</Spin>
+       </div>
+</div>
+<style>    
+.page-account {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 680px;
+    text-align: center;
+    position: relative;
+    vertical-align: middle;
+}
+
+.page-account-container {
+    padding: 32px 0;
+    width: 384px;
+    margin: 0 auto;
+    text-align:center;
+}
+.page-account-login {
+    background: url(/images/bg.png) #fff center top no-repeat;
+    background-size: 100% auto;
+}
+
+
+
+
+</style>

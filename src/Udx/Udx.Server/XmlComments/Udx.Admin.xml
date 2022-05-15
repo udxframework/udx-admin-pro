@@ -1,0 +1,937 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Udx.Admin</name>
+    </assembly>
+    <members>
+        <member name="T:Udx.Admin.AdminStartup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Udx.Admin.AdminStartup.AddUdxAdmin(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+            <param name="Configuration"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Udx.Admin.Repositorys.ConfigRepository">
+            <summary>
+            模块持久层
+            </summary>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.ConfigRepository.#ctor(Udx.Admin.AdminContext,Udx.Auth.IUser)">
+            <summary>
+            模块
+            </summary>
+            <param name="dbContext"></param>
+            <param name="user"></param>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.ConfigRepository.GetConfigTreeAsync(Udx.Models.QueryModel)">
+            <summary>
+            获取配置的树形数据
+            </summary>
+            <param name="queryRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.ConfigRepository.GetConfigDetailListAsync(System.String)">
+            <summary>
+            获取配置的明细列表
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.ConfigRepository.SaveConfigModel(Udx.Admin.Models.ConfigSaveModel)">
+            <summary>
+            配置的主子表保存
+            </summary>
+            <param name="saveModel"></param>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.ConfigRepository.DeleteConfigAsync(System.String)">
+            <summary>
+            删除一个配置包括子表明细
+            </summary>
+        </member>
+        <member name="T:Udx.Admin.Repositorys.IConfigRepository">
+            <summary>
+            IConfigRepository
+            </summary>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.IConfigRepository.GetConfigTreeAsync(Udx.Models.QueryModel)">
+            <summary>
+            获取树形数据
+            </summary>
+            <param name="queryRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.IConfigRepository.GetConfigDetailListAsync(System.String)">
+            <summary>
+            获取配置明细
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.IConfigRepository.SaveConfigModel(Udx.Admin.Models.ConfigSaveModel)">
+            <summary>
+            配置的主子表保存
+            </summary>
+            <param name="saveModel"></param>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.IConfigRepository.DeleteConfigAsync(System.String)">
+            <summary>
+            根据配置Id删除主子配置数据
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Udx.Admin.Repositorys.IModuleRepository">
+            <summary>
+            IModuleRepository
+            </summary>
+        </member>
+        <member name="T:Udx.Admin.Repositorys.ModuleRepository">
+            <summary>
+            模块持久层
+            </summary>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.ModuleRepository.#ctor(Udx.Admin.AdminContext,Udx.Auth.IUser)">
+            <summary>
+            模块
+            </summary>
+            <param name="dbContext"></param>
+            <param name="user"></param>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.ModuleRepository.GetModuleTreeAsync(Udx.Models.QueryModel)">
+            <summary>
+            获取模块的树形数据
+            </summary>
+            <param name="queryRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Udx.Admin.Repositorys.IOrgRepository">
+            <summary>
+            IOrgRepository
+            </summary>
+        </member>
+        <member name="T:Udx.Admin.Repositorys.OrgRepository">
+            <summary>
+            组织机构持久层
+            </summary>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.OrgRepository.#ctor(Udx.Admin.AdminContext,Udx.Auth.IUser)">
+            <summary>
+            组织机构
+            </summary>
+            <param name="dbContext"></param>
+            <param name="user"></param>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.OrgRepository.GetOrgTreeAsync(Udx.Models.QueryModel)">
+            <summary>
+            获取组织机构的树形数据
+            </summary>
+            <param name="queryRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.OrgRepository.GetOrgUserAsync(System.String)">
+            <summary>
+            获取组织机构用户
+            </summary>
+            <param name="orgId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.OrgRepository.SaveOrgUserAsync(Udx.Models.SaveModel{Udx.Dbs.Entities.OrgUserEntity})">
+            <summary>
+            保存组织机构用户
+            </summary>
+            <param name="saveModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.OrgRepository.GetOrgUserAsync(System.String,System.String)">
+            <summary>
+            查询组织机构用户
+            </summary>
+            <param name="orgId"></param>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Udx.Admin.Repositorys.IRoleModuleRepository">
+            <summary>
+            IRoleModuleRepository
+            </summary>
+        </member>
+        <member name="T:Udx.Admin.Repositorys.IRoleRepository">
+            <summary>
+            IRoleRepository
+            </summary>
+        </member>
+        <member name="T:Udx.Admin.Repositorys.IRoleUserRepository">
+            <summary>
+            IRoleRepository
+            </summary>
+        </member>
+        <member name="T:Udx.Admin.Repositorys.RoleModuleRepository">
+            <summary>
+            角色模块持久层
+            </summary>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.RoleModuleRepository.#ctor(Udx.Admin.AdminContext,Udx.Auth.IUser)">
+            <summary>
+            角色
+            </summary>
+            <param name="dbContext"></param>
+            <param name="user"></param>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.RoleModuleRepository.GetRoleModulesAsync(System.String)">
+            <summary>
+            获取角色的模块
+            </summary>
+            <param name="roleId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.RoleModuleRepository.GetRoleModuleTreeAsync(System.String)">
+            <summary>
+            获取角色模块树
+            </summary>
+            <param name="roleId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.RoleModuleRepository.SaveRoleModuleAsync(Udx.Admin.Models.RoleModuleSaveModel)">
+            <summary>
+            保存角色的模块
+            </summary>
+            <param name="saveModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.RoleModuleRepository.GetUserModulesAsync(System.String)">
+            <summary>
+            获取用户的模块
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.RoleModuleRepository.GetUserConfigModulesAsync(System.String)">
+            <summary>
+            获取管理员的模块
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Udx.Admin.Repositorys.RoleRepository">
+            <summary>
+            角色持久层
+            </summary>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.RoleRepository.#ctor(Udx.Admin.AdminContext,Udx.Auth.IUser)">
+            <summary>
+            角色
+            </summary>
+            <param name="dbContext"></param>
+            <param name="user"></param>
+        </member>
+        <member name="T:Udx.Admin.Repositorys.RoleUserRepository">
+            <summary>
+            角色用户持久层
+            </summary>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.RoleUserRepository.#ctor(Udx.Admin.AdminContext,Udx.Auth.IUser)">
+            <summary>
+            角色
+            </summary>
+            <param name="dbContext"></param>
+            <param name="user"></param>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.RoleUserRepository.GetUserRolesAsync(System.String)">
+            <summary>
+            获取用户的角色
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.RoleUserRepository.GetRoleUsersAsync(System.String)">
+            <summary>
+            获取角色的用户
+            </summary>
+            <param name="roleId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.RoleUserRepository.SaveRoleUserAsync(Udx.Admin.Models.RoleUserSaveModel)">
+            <summary>
+            保存用户角色
+            </summary>
+            <param name="saveModel"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Udx.Admin.Repositorys.ITenantRepository">
+            <summary>
+            ITenantRepository
+            </summary>
+        </member>
+        <member name="T:Udx.Admin.Repositorys.TenantRepository">
+            <summary>
+            TenantRepository
+            </summary>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.TenantRepository.#ctor(Udx.Admin.AdminContext,Udx.Auth.IUser)">
+            <summary>
+            
+            </summary>
+            <param name="dbContext"></param>
+            <param name="user"></param>
+        </member>
+        <member name="T:Udx.Admin.Repositorys.IUserRepository">
+            <summary>
+            IUserRepository
+            </summary>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.IUserRepository.SaveUserAsync(Udx.Models.SaveModel{Udx.Admin.Models.UserEditModel})">
+            <summary>
+            保存用户
+            </summary>
+            <param name="operaterModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.IUserRepository.ExportAsync(Udx.Models.QueryModel)">
+            <summary>
+            导出
+            </summary>
+            <param name="queryModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.IUserRepository.RegisterAsync(Udx.Admin.Models.RegisterModel)">
+            <summary>
+            用户注册
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.IUserRepository.SaveUserListAsync(Udx.Models.SaveModel{System.Collections.Generic.List{Udx.Admin.Models.UserEditModel}})">
+            <summary>
+            批量保存
+            </summary>
+            <param name="operaterModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.IUserRepository.ResetPwdAsync(System.Collections.Generic.List{Udx.Admin.Models.UserEditModel})">
+            <summary>
+            批量重置密码
+            </summary>
+            <param name="operaterModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.IUserRepository.ValidPwdAsync(Udx.Admin.Models.ChangePwdModel)">
+            <summary>
+            验证旧密码
+            </summary>
+            <param name="operaterModel"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Udx.Admin.Repositorys.UserRepository">
+            <summary>
+            UserRepository
+            </summary>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.UserRepository.#ctor(Udx.Admin.AdminContext,Udx.Auth.IUser,Udx.EventBus.IEventPublisher,Microsoft.Extensions.Logging.ILogger{Udx.Admin.Repositorys.UserRepository})">
+            <summary>
+            UserRepository
+            </summary>
+            <param name="dbContext"></param>
+            <param name="user"></param>
+            <param name="logger">日志</param>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.UserRepository.SaveUserAsync(Udx.Models.SaveModel{Udx.Admin.Models.UserEditModel})">
+            <summary>
+            保存用户
+            </summary>
+            <param name="operaterModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.UserRepository.ExportAsync(Udx.Models.QueryModel)">
+            <summary>
+            导出
+            </summary>
+            <param name="queryModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.UserRepository.SaveUserListAsync(Udx.Models.SaveModel{System.Collections.Generic.List{Udx.Admin.Models.UserEditModel}})">
+            <summary>
+            保存用户
+            </summary>
+            <param name="operaterModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.UserRepository.ResetPwdAsync(System.Collections.Generic.List{Udx.Admin.Models.UserEditModel})">
+            <summary>
+            批量重置密码
+            </summary>
+            <param name="operaterModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.UserRepository.RegisterAsync(Udx.Admin.Models.RegisterModel)">
+            <summary>
+            用户注册
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.UserRepository.ValidPwdAsync(Udx.Admin.Models.ChangePwdModel)">
+            <summary>
+            验证旧密码
+            </summary>
+            <param name="operaterModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Repositorys.UserRepository.ChangePwdAsync(Udx.Admin.Models.ChangePwdModel)">
+            <summary>
+            修改密码
+            </summary>
+            <param name="operaterModel"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Udx.Admin.Services.AdminService">
+            <summary>
+            Admin服务
+            </summary>
+        </member>
+        <member name="M:Udx.Admin.Services.AdminService.Index">
+            <summary>
+            Admin服务说明
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Udx.Admin.Services.AuthService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Udx.Admin.Services.AuthService.#ctor(Udx.Auth.IUserToken,Udx.Auth.IUser,Udx.Configs.AppConfig,Udx.Admin.Repositorys.IUserRepository,Microsoft.Extensions.Logging.ILogger{Udx.Admin.Services.AuthService},Udx.Configs.JwtConfig,Udx.EventBus.IEventPublisher)">
+            <summary>
+            
+            </summary>
+            <param name="userToken"></param>
+            <param name="user"></param>
+            <param name="appConfig"></param>
+            <param name="userRepository"></param>
+            <param name="logger"></param>
+            <param name="jwtConfig"></param>
+        </member>
+        <member name="M:Udx.Admin.Services.AuthService.GetToken(Udx.Admin.Models.AuthLoginResponse)">
+            <summary>
+            获得token
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.AuthService.LoginTokenAsync(Udx.Admin.Models.AuthLoginRequest)">
+            <summary>
+            用户登录
+            根据登录信息生成Token
+            </summary>
+            <param name="input">登录信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.AuthService.Refresh(System.String)">
+            <summary>
+            刷新Token
+            以旧换新
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.AuthService.LoginAsync(Udx.Admin.Models.AuthLoginRequest)">
+            <summary>
+            用户登录
+            返回登录信息
+            </summary>
+            <param name="input">登录信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.AuthService.RegisterAsync(Udx.Models.DataRequest{Udx.Admin.Models.RegisterModel})">
+            <summary>
+            注册用户
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="T:Udx.Admin.Services.FileService">
+            <summary>
+            FileService
+            </summary>
+        </member>
+        <member name="M:Udx.Admin.Services.FileService.#ctor(Udx.Mongo.MongoContext,Udx.Mongo.Bucket.ExportBucket)">
+            <summary>
+            文件服务
+            </summary>
+            <param name="context"></param>
+            <param name="export">导出Bucket</param>
+        </member>
+        <member name="M:Udx.Admin.Services.FileService.Index">
+            <summary>
+            FileService 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.FileService.Download(System.String)">
+            <summary>
+            下载文件
+            </summary>
+        </member>
+        <member name="M:Udx.Admin.Services.FileService.Export(System.String)">
+            <summary>
+            导出文件
+            </summary>
+        </member>
+        <member name="T:Udx.Admin.Services.ImportService">
+            <summary>
+            ImportService
+            </summary>
+        </member>
+        <member name="M:Udx.Admin.Services.ImportService.#ctor(Udx.Mongo.Bucket.ImportBucket)">
+            <summary>
+            文件服务
+            </summary>
+            <param name="import">导入Bucket</param>
+        </member>
+        <member name="M:Udx.Admin.Services.ImportService.Index">
+            <summary>
+            ImportService 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.ImportService.Upload(System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Http.IFormFile})">
+            <summary>
+            上传文件
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.ImportService.Download(System.String)">
+            <summary>
+            下载文件
+            </summary>
+        </member>
+        <member name="T:Udx.Admin.Services.VditorService">
+            <summary>
+            VditorService
+            </summary>
+        </member>
+        <member name="M:Udx.Admin.Services.VditorService.#ctor(Udx.Mongo.Bucket.VditorBucket)">
+            <summary>
+            编辑框文件服务
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:Udx.Admin.Services.VditorService.Index">
+            <summary>
+            FileService 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.VditorService.Upload(System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Http.IFormFile})">
+            <summary>
+            上传文件
+            </summary>
+            <param name="files"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.VditorService.Download(System.String)">
+            <summary>
+            下载文件
+            </summary>
+        </member>
+        <member name="T:Udx.Admin.Services.ConfigCacheService">
+            <summary>
+            ConfigCache配置中心缓存服务
+            </summary>	
+        </member>
+        <member name="M:Udx.Admin.Services.ConfigCacheService.#ctor(Udx.Auth.IUser,Udx.Admin.Repositorys.IConfigRepository)">
+            <summary>
+            ConfigCache配置中心缓存服务
+            </summary>
+            <param name="user"></param>
+            <param name="ConfigRepository"></param>
+        </member>
+        <member name="M:Udx.Admin.Services.ConfigCacheService.GetConfigOptionAsync(Udx.Models.DataRequest{System.String})">
+            <summary>
+            根据key获取ConfigOption信息
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Udx.Admin.Services.ConfigService">
+            <summary>
+            Config服务
+            </summary>	
+        </member>
+        <member name="M:Udx.Admin.Services.ConfigService.#ctor(Udx.Auth.IUser,Udx.Admin.Repositorys.IConfigRepository)">
+            <summary>
+            Config服务
+            </summary>
+            <param name="user"></param>
+            <param name="ConfigRepository"></param>
+        </member>
+        <member name="M:Udx.Admin.Services.ConfigService.GetAsync(Udx.Models.DataRequest{System.String})">
+            <summary>
+            根据Id获取Config信息
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.ConfigService.PageQueryAsync(Udx.Models.DataRequest{Udx.Models.QueryModel})">
+            <summary>
+            分页获取信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.ConfigService.SaveAsync(Udx.Models.DataRequest{Udx.Models.SaveModel{Udx.Admin.Models.ConfigEdit}})">
+            <summary>
+            保存操作主表实体
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.ConfigService.SaveConfigAsync(Udx.Models.DataRequest{Udx.Admin.Models.ConfigSaveModel})">
+            <summary>
+            保存操作主子表实体
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.ConfigService.DeleteConfigAsync(Udx.Models.DataRequest{System.String})">
+            <summary>
+            删除操作主子表实体
+            </summary>
+            <param name="request">配置的Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.ConfigService.TreeQueryAsync(Udx.Models.DataRequest{Udx.Models.QueryModel})">
+            <summary>
+            获取配置信息的树结构信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.ConfigService.GetConfigDetailListAsync(Udx.Models.DataRequest{System.String})">
+            <summary>
+            获取配置明细列表
+            </summary>
+            <param name="request">Config Id</param>
+            <returns></returns>
+        </member>
+        <member name="T:Udx.Admin.Services.EventBusService">
+            <summary>
+            事件总线消息
+            </summary>
+        </member>
+        <member name="M:Udx.Admin.Services.EventBusService.#ctor(Udx.Auth.IUser,Udx.EventBus.IEventPublisher)">
+            <summary>
+            
+            </summary>
+            <param name="user"></param>
+            <param name="eventPublisher"></param>
+        </member>
+        <member name="M:Udx.Admin.Services.EventBusService.PublishAsync(Udx.Models.DataRequest{Udx.EventBus.EventData})">
+            <summary>
+            事件发布
+            </summary>
+            <param name="request">事件数据</param>
+            <returns></returns>
+        </member>
+        <member name="T:Udx.Admin.Services.LogsService">
+            <summary>
+            事件总线消息
+            </summary>
+        </member>
+        <member name="M:Udx.Admin.Services.LogsService.#ctor(Udx.Auth.IUser,Udx.Logs.Repositorys.ILogInfoRepository)">
+            <summary>
+            
+            </summary>
+            <param name="user"></param>
+            <param name="logInfoRepository"></param>
+        </member>
+        <member name="M:Udx.Admin.Services.LogsService.LogWriteAsync(Udx.Models.DataRequest{Udx.Logs.Models.LogInfo})">
+            <summary>
+            事件发布
+            </summary>
+            <param name="request">事件数据</param>
+            <returns></returns>
+        </member>
+        <member name="T:Udx.Admin.Services.ModuleService">
+            <summary>
+            Module服务
+            </summary>	
+        </member>
+        <member name="M:Udx.Admin.Services.ModuleService.#ctor(Udx.Auth.IUser,Udx.Admin.Repositorys.IModuleRepository)">
+            <summary>
+            Module服务
+            </summary>
+            <param name="user"></param>
+            <param name="ModuleRepository"></param>
+        </member>
+        <member name="M:Udx.Admin.Services.ModuleService.GetAsync(Udx.Models.DataRequest{System.String})">
+            <summary>
+            根据Id获取Module信息
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.ModuleService.PageQueryAsync(Udx.Models.DataRequest{Udx.Models.QueryModel})">
+            <summary>
+            分页获取信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.ModuleService.TreeQueryAsync(Udx.Models.DataRequest{Udx.Models.QueryModel})">
+            <summary>
+            获取模块信息的树结构信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.ModuleService.SaveAsync(Udx.Models.DataRequest{Udx.Models.SaveModel{Udx.Admin.Models.ModuleEdit}})">
+            <summary>
+            保存操作实体
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Udx.Admin.Services.OrgService">
+            <summary>
+            Org服务
+            </summary>	
+        </member>
+        <member name="M:Udx.Admin.Services.OrgService.#ctor(Udx.Auth.IUser,Udx.Admin.Repositorys.IOrgRepository)">
+            <summary>
+            Org服务
+            </summary>
+            <param name="user"></param>
+            <param name="OrgRepository"></param>
+        </member>
+        <member name="M:Udx.Admin.Services.OrgService.GetAsync(Udx.Models.DataRequest{System.String})">
+            <summary>
+            根据Id获取Org信息
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.OrgService.PageQueryAsync(Udx.Models.DataRequest{Udx.Models.QueryModel})">
+            <summary>
+            分页获取信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.OrgService.TreeQueryAsync(Udx.Models.DataRequest{Udx.Models.QueryModel})">
+            <summary>
+            获取模块信息的树结构信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.OrgService.GetOrgUserAsync(Udx.Models.DataRequest{System.String})">
+            <summary>
+            获取组织机构用户
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.OrgService.SaveAsync(Udx.Models.DataRequest{Udx.Models.SaveModel{Udx.Admin.Models.OrgEdit}})">
+            <summary>
+            保存操作实体
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Udx.Admin.Services.RoleService">
+            <summary>
+            Role服务
+            </summary>	
+        </member>
+        <member name="M:Udx.Admin.Services.RoleService.#ctor(Udx.Auth.IUser,Udx.Admin.Repositorys.IRoleRepository)">
+            <summary>
+            Role服务
+            </summary>
+            <param name="user"></param>
+            <param name="RoleRepository"></param>
+        </member>
+        <member name="M:Udx.Admin.Services.RoleService.GetAsync(Udx.Models.DataRequest{System.String})">
+            <summary>
+            根据Id获取Role信息
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.RoleService.PageQueryAsync(Udx.Models.DataRequest{Udx.Models.QueryModel})">
+            <summary>
+            分页获取信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.RoleService.SaveAsync(Udx.Models.DataRequest{Udx.Models.SaveModel{Udx.Admin.Models.RoleEdit}})">
+            <summary>
+            保存操作实体
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Udx.Admin.Services.RuleService">
+            <summary>
+            权限规则服务
+            </summary>	
+        </member>
+        <member name="M:Udx.Admin.Services.RuleService.#ctor(Udx.Auth.IUser,Udx.Admin.Repositorys.IRoleRepository,Udx.Admin.Repositorys.IRoleUserRepository,Udx.Admin.Repositorys.IRoleModuleRepository)">
+            <summary>
+            权限规则服务
+            </summary>
+            <param name="user"></param>
+            <param name="RoleRepository"></param>
+            <param name="RoleUserRepository"></param>
+            <param name="RoleModuleRepository"></param>
+        </member>
+        <member name="M:Udx.Admin.Services.RuleService.GetUserRolesAsync(Udx.Models.DataRequest{System.String})">
+            <summary>
+            根据用户Id获取用户的角色信息
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.RuleService.GetRoleUsersAsync(Udx.Models.DataRequest{System.String})">
+            <summary>
+            根据角色Id获取角色下的用户信息
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.RuleService.SaveRoleUserAsync(Udx.Models.DataRequest{Udx.Admin.Models.RoleUserSaveModel})">
+            <summary>
+            保存角色用户
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.RuleService.GetRoleModulesAsync(Udx.Models.DataRequest{System.String})">
+            <summary>
+            根据角色Id获取角色下的模块信息
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.RuleService.SaveRoleModuleAsync(Udx.Models.DataRequest{Udx.Admin.Models.RoleModuleSaveModel})">
+            <summary>
+            保存角色模块
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.RuleService.GetUserModulesAsync(Udx.Models.DataRequest{System.String})">
+            <summary>
+            获取用户的模块权限
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Udx.Admin.Services.TenantService">
+            <summary>
+            TenantService
+            </summary>
+        </member>
+        <member name="M:Udx.Admin.Services.TenantService.#ctor(Udx.Auth.IUser,Udx.Admin.Repositorys.ITenantRepository)">
+            <summary>
+            TenantService
+            </summary>
+            <param name="user"></param>
+            <param name="tenantRepository"></param>
+        </member>
+        <member name="M:Udx.Admin.Services.TenantService.GetAsync(Udx.Models.DataRequest{System.String})">
+            <summary>
+            获取TenantGetOutput
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.TenantService.PageQueryAsync(Udx.Models.DataRequest{Udx.Models.QueryModel})">
+            <summary>
+            获取列表分页
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.TenantService.SaveAsync(Udx.Models.DataRequest{Udx.Models.SaveModel{Udx.Admin.Models.TenantEditModel}})">
+            <summary>
+            保存操作实体
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Udx.Admin.Services.UserService">
+            <summary>
+            用户服务
+            </summary>	
+        </member>
+        <member name="M:Udx.Admin.Services.UserService.#ctor(Udx.Auth.IUser,Udx.Admin.Repositorys.IUserRepository,Udx.EventBus.IEventPublisher)">
+            <summary>
+            用户服务
+            </summary>
+            <param name="user"></param>
+            <param name="userRepository"></param>
+        </member>
+        <member name="M:Udx.Admin.Services.UserService.GetLoginUserAsync(Udx.Models.DataRequest{System.String})">
+            <summary>
+            获取登录用户信息
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.UserService.GetAsync(Udx.Models.DataRequest{System.String})">
+            <summary>
+            根据主键Id获取用户信息
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.UserService.PageQueryAsync(Udx.Models.DataRequest{Udx.Models.QueryModel})">
+            <summary>
+            分页获取用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.UserService.ExportAsync(Udx.Models.DataRequest{Udx.Models.QueryModel})">
+            <summary>
+            导出用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.UserService.SaveAsync(Udx.Models.DataRequest{Udx.Models.SaveModel{Udx.Admin.Models.UserEditModel}})">
+            <summary>
+            保存操作实体
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.UserService.SaveListAsync(Udx.Models.DataRequest{Udx.Models.SaveModel{System.Collections.Generic.List{Udx.Admin.Models.UserEditModel}}})">
+            <summary>
+            批量保存
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.UserService.ResetPwdAsync(Udx.Models.DataRequest{System.Collections.Generic.List{Udx.Admin.Models.UserEditModel}})">
+            <summary>
+            重置密码
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.UserService.ChangePasswordAsync(Udx.Models.DataRequest{Udx.Admin.Models.UserChangePasswordInput})">
+            <summary>
+            更新密码
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Admin.Services.UserService.ChangePwdAsync(Udx.Models.DataRequest{Udx.Admin.Models.ChangePwdModel})">
+            <summary>
+            更新密码
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

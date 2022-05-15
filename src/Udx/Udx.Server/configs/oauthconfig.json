@@ -1,0 +1,54 @@
+{
+  "oauth": {
+    "qq": {
+      "app_id": "qq_app_id",
+      "app_key": "qq_app_key",
+      "redirect_uri": "https://oauthlogin.net/oauth/qqcallback",
+      "scope": "get_user_info"
+    },
+    "github": {
+      "app_id": "github_app_id",
+      "app_key": "github_app_key",
+      "redirect_uri": "https://oauthlogin.net/oauth/githubcallback",
+      "scope": "repo"
+    },
+    "wechat": {
+      "app_id": "wechat_app_id",
+      "app_key": "wechat_app_key",
+      "redirect_uri": "https://oauthlogin.net/oauth/wechatcallback",
+      "scope": "snsapi_userinfo"
+    },
+    "huawei": {
+      "app_id": "huawei_app_id",
+      "app_key": "huawei_app_key",
+      "redirect_uri": "https://oauthlogin.net/oauth/huaweicallback",
+      "scope": "https://www.huawei.com/auth/account"
+    },
+    "gitee": {
+      "app_id": "gitee_app_id",
+      "app_key": "gitee_app_key",
+      "redirect_uri": "http://oauthlogin.net/oauth/giteecallback",
+      "scope": "user_info"
+    },
+    "baidu": {
+      "app_id": "baidu_app_id",
+      "app_key": "baidu_app_key",
+      "redirect_uri": "http://oauthlogin.net/oauth/baiducallback",
+      "scope": "basic"
+    },
+    "alipay": {
+      "app_id": "alipay_app_id",
+      "app_key": "alipay_app_key",
+      "redirect_uri": "https://oauthlogin.net/oauth/alipaycallback",
+      "scope": "auth_user",
+      "private_key": "private_key",
+      "public_key": "public_key"
+    },
+    "gitlab": {
+      "app_id": "gitlab_app_id",
+      "app_key": "gitlab_app_key",
+      "redirect_uri": "http://oauthlogin.net/oauth/gitlabcallback",
+      "scope": "read_user"
+    }
+  }
+}

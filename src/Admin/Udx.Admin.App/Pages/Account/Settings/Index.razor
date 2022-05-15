@@ -1,0 +1,38 @@
+@namespace Udx.Admin.App.Pages.Account.Settings
+@page "/admin/profiles-list"
+@attribute [ReuseTabsPageTitle("∏ˆ»À…Ë÷√")]
+<ErrorBoundary>  
+   <Layout>
+<Sider Theme="SiderTheme.Light" Style="background: #fff;;"> 
+            <Menu 
+                Mode="MenuMode.Inline" 
+                SelectedKeys="new []{_selectKey}" 
+                OnMenuItemClicked="SelectKey">
+                @foreach (var item in _menuMap)
+                {
+                    <MenuItem Key="@item.Key">@item.Value</MenuItem>
+                }
+            </Menu>
+      
+ </Sider>
+<Content Style="background: #fff;padding:10px;width:calc(100%)">  
+            <Title Level="4">@_menuMap[_selectKey]</Title>
+            @switch (_selectKey)
+            {
+                 case nameof(BaseView):
+                    <BaseView />
+                    break;
+                case nameof(BindingView):
+                    <BindingView />
+                    break;
+                case nameof(ChangePwd):
+                     <ChangePwd />
+                    break;               
+               
+                case nameof(NotificationView):
+                    <NotificationView />
+                    break;
+            }
+ </Content>
+ </Layout>
+</ErrorBoundary>  

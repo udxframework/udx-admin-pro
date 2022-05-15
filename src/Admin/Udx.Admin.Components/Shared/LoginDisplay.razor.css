@@ -1,0 +1,44 @@
+﻿
+.user-profile .logo-container {
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.user-profile .log-off-btn {
+    padding-top: 0.815rem;
+    padding-bottom: 0.815rem;
+    border-top: 1px solid #e5e5e5;
+}
+
+.user-profile .menu-icon-user-profile {
+    opacity: 0.25;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.menu-icon {
+    width: 1rem;
+    height: 1rem;
+    min-width: 1rem;
+    min-height: 1rem;
+    background-size: contain;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    background-position: center center;
+    background-color: currentColor;
+}
+
+.menu-icon-home {
+    mask-image: url("/images/home.svg") !important;
+    -webkit-mask-image: url("/images/Home.svg") !important;
+}
+
+.menu-icon-support {
+    mask-image: url("/images/Support.svg") !important;
+    -webkit-mask-image: url("/images/Support.svg") !important;
+}
+
+.menu-icon-user-profile {
+    mask-image: url("/images/UserProfile.svg") !important;
+    -webkit-mask-image: url("/images/UserProfile.svg") !important;
+}

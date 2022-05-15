@@ -1,0 +1,32 @@
+﻿@namespace Udx.Admin.Components
+@inherits UdxComponentBase
+<Modal Title="选择用户" Visible="@Visible" OnOk="@HandleUserOk" OnCancel="OnCancle" Style="min-width:800px" Draggable=true>
+     <Card  Style="border-width:0px;width:350px"> 
+        <CardTabs>
+                <Tabs DefaultActiveKey="1">
+                    <TabPane Key="1">
+                        <TabTemplate>成员</TabTemplate>
+                        <ChildContent>
+
+                        <Search Placeholder="请输入查询条件" WrapperStyle="width: 300px;" @bind-Value="@TxtValue" OnSearch="OnSearchAsync" />
+                         
+                        <Table TItem="UserModel"   DataSource="@_QueryResponse.Data"  @bind-SelectedRows="SelectedRows"   HidePagination  ScrollY="400"    >
+                                <Selection   Key="@(context.Id)"  Type="@SelectType"  />
+                                <Column @bind-Field="@context.UserName" Title="用户名" Width="100" Ellipsis/>
+                                <Column @bind-Field="@context.Name" Title="名字" Width="100" Ellipsis/>  
+                            </Table>
+                            
+                        </ChildContent>
+                    </TabPane>
+                    <TabPane Key="2">
+                        <TabTemplate>部门</TabTemplate>
+                        <ChildContent>
+                            
+
+                        </ChildContent>
+                    </TabPane>
+              
+                </Tabs>
+            </CardTabs>
+            </Card> 
+</Modal>

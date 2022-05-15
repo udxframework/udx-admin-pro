@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Udx.Cms</name>
+    </assembly>
+    <members>
+        <member name="T:Udx.Cms.Repositorys.CmsCategoryRepository">
+            <summary>
+            分类持久层
+            </summary>
+        </member>
+        <member name="M:Udx.Cms.Repositorys.CmsCategoryRepository.#ctor(Udx.Cms.CmsContext,Udx.Auth.IUser)">
+            <summary>
+            分类
+            </summary>
+            <param name="dbContext"></param>
+            <param name="user"></param>
+        </member>
+        <member name="M:Udx.Cms.Repositorys.CmsCategoryRepository.GetCmsCategoryTreeAsync(Udx.Models.QueryModel)">
+            <summary>
+            获取分类的树形数据
+            </summary>
+            <param name="queryRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Udx.Cms.Repositorys.ICmsCategoryRepository">
+            <summary>
+            ICmsCategoryRepository
+            </summary>
+        </member>
+        <member name="T:Udx.Cms.Repositorys.CmsContentRepository">
+            <summary>
+            CmsContentRepository
+            </summary>
+        </member>
+        <member name="M:Udx.Cms.Repositorys.CmsContentRepository.#ctor(Udx.Cms.CmsContext,Udx.Auth.IUser)">
+            <summary>
+            
+            </summary>
+            <param name="dbContext"></param>
+            <param name="user"></param>
+        </member>
+        <member name="M:Udx.Cms.Repositorys.CmsContentRepository.CmsContentQueryAsync``1(Udx.Models.QueryModel)">
+            <summary>
+            分页查询内容列表
+            </summary>
+            <param name="queryRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Udx.Cms.Repositorys.ICmsContentRepository">
+            <summary>
+            ICmsContentRepository
+            </summary>
+        </member>
+        <member name="T:Udx.Cms.Services.CmsCategoryService">
+            <summary>
+            CmsCategory服务
+            </summary>	
+        </member>
+        <member name="M:Udx.Cms.Services.CmsCategoryService.#ctor(Udx.Auth.IUser,Udx.Cms.Repositorys.ICmsCategoryRepository)">
+            <summary>
+            CmsCategory服务
+            </summary>
+            <param name="user"></param>
+            <param name="CmsCategoryRepository"></param>
+        </member>
+        <member name="M:Udx.Cms.Services.CmsCategoryService.GetAsync(Udx.Models.DataRequest{System.String})">
+            <summary>
+            根据Id获取CmsCategory信息
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Cms.Services.CmsCategoryService.PageQueryAsync(Udx.Models.DataRequest{Udx.Models.QueryModel})">
+            <summary>
+            分页获取信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Cms.Services.CmsCategoryService.TreeQueryAsync(Udx.Models.DataRequest{Udx.Models.QueryModel})">
+            <summary>
+            获取分类信息的树结构信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Cms.Services.CmsCategoryService.SaveAsync(Udx.Models.DataRequest{Udx.Models.SaveModel{Udx.Cms.Models.CmsCategoryEdit}})">
+            <summary>
+            保存操作实体
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Udx.Cms.Services.CmsContentService">
+            <summary>
+            内容服务
+            </summary>
+        </member>
+        <member name="M:Udx.Cms.Services.CmsContentService.#ctor(Udx.Auth.IUser,Udx.Cms.Repositorys.ICmsContentRepository)">
+            <summary>
+            CmsContentService
+            </summary>
+            <param name="user"></param>
+            <param name="CmsContentRepository"></param>
+        </member>
+        <member name="M:Udx.Cms.Services.CmsContentService.GetAsync(Udx.Models.DataRequest{System.String})">
+            <summary>
+            获取CmsContentGetOutput
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Cms.Services.CmsContentService.PageQueryAsync(Udx.Models.DataRequest{Udx.Models.QueryModel})">
+            <summary>
+            获取列表分页
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Udx.Cms.Services.CmsContentService.SaveAsync(Udx.Models.DataRequest{Udx.Models.SaveModel{Udx.Cms.Models.CmsContentEditModel}})">
+            <summary>
+            保存操作实体
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Udx.Cms.Services.CmsService">
+            <summary>
+            CMS服务
+            </summary>
+        </member>
+        <member name="M:Udx.Cms.Services.CmsService.Index">
+            <summary>
+            CMS服务说明
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,18 @@
+﻿@namespace Udx.Cms.App.Pages.Cms
+@layout CmsPageLayout
+@inherits  ComponentBase
+@page "/Pages/{Id}"
+
+ @attribute [ReuseTabsPage(Title="cms",Ignore=true)]
+<ErrorBoundary>
+    <article style="padding: 10px 50px 10px 50px;width:90%;">
+        @if(string.IsNullOrEmpty(_cmsModel.Id)){<Empty />} 
+       else{
+      <Title Style="text-align:center">@_cmsModel.Title</Title>
+      <Divider Plain></Divider>
+      <Paragraph > 
+          <CmsPreview Markdown="@_cmsModel.Contents" Width="90%"></CmsPreview>
+          </Paragraph>
+       }
+    </article>
+</ErrorBoundary>

@@ -1,0 +1,37 @@
+﻿@using System.Net.Http
+@using System.Net.Http.Json
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@using Microsoft.AspNetCore.Components.WebAssembly.Http
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Mvc
+@using Microsoft.Extensions.Logging
+@using Microsoft.JSInterop
+@using System
+@using System.Collections.Generic
+@using System.Linq
+@using System.Threading.Tasks
+@using AntDesign
+@using Udx.Auth
+@using Udx.Admin.IServices
+@using Udx.App
+@using Udx.App.Components
+@using Udx.Admin.Components;
+@using Udx.Cms.App.Shared
+@using Udx.Cms.IServices
+@using Udx.Cms.Models
+@using Udx.Cms.App.Components
+@using Udx.Models
+@using Udx.Utils
+@using Serilog
+
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime 
+@inject AntDesign.MessageService MessageBox
+@inject AntDesign.ModalService ModalService
+@inject IServiceProvider ServiceProvider
+@inject IAuthorizationService AuthorizationService
+@inject UserIdentiyServer _identityContext

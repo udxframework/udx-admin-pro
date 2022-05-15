@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Cache\**" />
+    <Content Remove="Cache\**" />
+    <EmbeddedResource Remove="Cache\**" />
+    <None Remove="Cache\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Shared\UdxFooter.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Udx.Admin.Components\Udx.Admin.Components.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="Pages\Home\Home.razor" />
+  </ItemGroup>
+
+
+
+</Project>

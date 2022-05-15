@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Udx.Cms.App": {
+      "commandName": "Project",
+      "jsWebView2Debugging": true,
+      "nativeDebugging": true
+    }
+  }
+}

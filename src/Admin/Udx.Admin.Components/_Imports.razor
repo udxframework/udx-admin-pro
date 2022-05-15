@@ -1,0 +1,30 @@
+﻿@using AntDesign;
+@using Microsoft.AspNetCore.Components;
+@using Microsoft.AspNetCore.Components.Forms;
+@using Microsoft.AspNetCore.Components.Web;
+@using Microsoft.AspNetCore.Components.Routing;
+@using Microsoft.AspNetCore.WebUtilities;
+@using Microsoft.JSInterop;
+@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+@using System.Threading.Tasks;
+@using Udx.App.Models;
+@using Udx.Auth;
+@using Udx.Models;
+@using Udx.Utils;
+@using Udx.Entites;
+@using Udx.Admin.IServices;
+@using Udx.Admin.Models;
+@using Serilog;
+@using Udx.App.Components
+
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime 
+@inject IServiceProvider ServiceProvider
+@inject IdentityUserState identityUserState
+@inject UserIdentiyServer userIdentiyServer
+@inject AntDesign.MessageService MessageBox
+@inject IRuleService RuleService
+@inject IConfigCacheService  ConfigCacheService

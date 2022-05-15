@@ -1,0 +1,49 @@
+﻿@namespace Udx.Admin.App.Pages.Home
+@implements IReuseTabsPage
+@inherits UdxComponentBase
+@page "/admin/home"
+@code {
+    public RenderFragment GetPageTitle() => @<div><Icon Type="home" />我的仪表盘</div>;
+}
+@attribute [ReuseTabsPage(Title = "工作台", Closable = false)]
+<PageHeader  >
+    <!--avatar-->
+    <PageHeaderAvatar>
+       
+ <Avatar Style="background-color: #f56a00;" Icon="user" />@User?.Name 您好，欢迎使用！
+    </PageHeaderAvatar>
+</PageHeader>
+    <Row>
+        <Col Span="12">
+        <div class="home-card">
+        <Card Bordered="false" Title=@("我的动态")>
+        <Extra>
+        <a>更多</a>
+
+        </Extra>
+        <Body>
+        <AntList DataSource="@data" TItem="BasicItem">
+        <ListItem OnClick="()=>ItemClick(context.Title)">
+        <ListItemMeta Avatar="avatar" Description="Udx Design, a design language for background applications, is refined by AntBlazor">
+        <TitleTemplate>
+        <a>@context.Title</a>
+        </TitleTemplate>
+        </ListItemMeta>
+        </ListItem>
+        </AntList>
+        </Body>
+        </Card>
+        </div>
+        </Col>
+
+        <Col Span="12">
+        <div class="home-card">
+        <Card Bordered="false" Title=@("我关注的")>
+        
+        <Body>
+        <Empty />
+        </Body>
+        </Card>
+        </div>
+        </Col>
+        </Row>

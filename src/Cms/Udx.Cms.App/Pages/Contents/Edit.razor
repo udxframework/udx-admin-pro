@@ -1,0 +1,85 @@
+﻿@namespace Udx.Cms.App.Pages.Contents
+@inherits  UdxComponentBase
+@page "/cms/contents-edit/{Id}/{Title}"
+<ErrorBoundary>
+<Form Model="@_editModel"
+      OnFinish="OnFinish"
+      OnFinishFailed="OnFinishFailed"
+      Size="@AntSizeLDSType.Default"
+      LabelColSpan="2"
+      WrapperColSpan="6"
+      >
+
+    <PageHeader Class="site-page-header">
+        <!--title-->
+        <PageHeaderTitle>内容管理</PageHeaderTitle>
+        <!--subtitle-->
+        <PageHeaderSubtitle>新增</PageHeaderSubtitle>
+        <!--extra-->
+        <PageHeaderExtra>
+            
+            <div class="udx-page-header-extra-fixed">
+            <Button Icon="plus" Disabled='!RuleHelper.GetAction("新增")' OnClick="OnAddClick">新增</Button>
+            <Button Icon="save" Disabled='!RuleHelper.GetAction("保存")' HtmlType="submit" Type="primary">保存</Button>
+            <Button Icon="back" OnClick="OnBack">返回</Button>
+            </div>
+        </PageHeaderExtra>
+      <PageHeaderContent >      
+             @if (!string.IsNullOrEmpty(context.MessageInfo)) { 
+                    <Alert Type="@AlertType.Info"  Description="@context.MessageInfo"/>
+                    }
+            <FormItem Label="标题"  >
+                <Input @bind-Value="@context.Title" AllowClear="true" MaxLength=@(64) DebounceMilliseconds=1000/>
+            </FormItem>
+           <FormItem Label="作者" WrapperColSpan="2">
+                <Input @bind-Value="@context.Author" AllowClear="true" width="100" MaxLength=@(8) DebounceMilliseconds=1000/>
+            </FormItem> 
+             <FormItem Label="内容"  WrapperColSpan="12" >
+                 <UdxVditor @ref="Vditor" Height="500" Value="@context.Contents" ValueChanged="ContentsChanged"></UdxVditor>
+            </FormItem>
+             <FormItem Label="封面" WrapperColSpan="12" Help="点击选择上传封面图片，建议宽高比例(2.35:1) 900*383px，大小300K以内">
+                <UdxUploadImg @bind-Value="@context.CoverImgUrl" MaxSize="300" Style="width:300px;height:128px;" />
+            </FormItem>
+           <FormItem Label="状态" WrapperColSpan="3">
+                <SimpleSelect @bind-Value="@context.Status" DefaultValue="草稿" >
+                    <SelectOptions>
+                         <SimpleSelectOption Value="草稿" Label="草稿"></SimpleSelectOption>
+                         <SimpleSelectOption Value="审核中" Label="审核中"></SimpleSelectOption>
+                         <SimpleSelectOption Value="已发布" Label="已发布"></SimpleSelectOption>
+                         <SimpleSelectOption Value="已作废" Label="已作废"></SimpleSelectOption>
+                    </SelectOptions>
+                </SimpleSelect>
+            </FormItem>       
+            <FormItem Label="排序" Help="排序越大在最前面" WrapperColSpan="2">
+                <AntDesign.InputNumber  @bind-Value="@context.Sort"  />
+            </FormItem>   
+            <FormItem Label="分类" >
+             @* <CmsCategoryTreeSelect  @bind-Value="@context.CategoryId" SelectItemChanged="CategoryIdSelectItemChanged" />*@
+          <TreeSelect TItem="CmsCategoryTree" Style="width:100%;" ref=@treeSelect
+             DataSource="_categoryTree"
+             TitleExpression="x => x.Name"
+             ChildrenExpression="x => x.Items"
+             KeyExpression="x => x.Id"
+             IsLeafExpression="x => !x.Items.Any()"             
+			 @bind-Value="@context.CategoryId" Placeholder="请选择分类"
+             OnSelectedItemChanged="CategoryIdSelectItemChanged"             
+             AllowClear TreeDefaultExpandAll EnableSearch
+              DefaultValues="@context.CategoryIds"
+             />
+            </FormItem> 
+              <FormItem Label="标签" WrapperColSpan="12" >
+                <Input @bind-Value="@context.Tags" AllowClear="true" MaxLength=@(255) DebounceMilliseconds=1000/>
+            </FormItem>
+             <FormItem Label="摘要" WrapperColSpan="12" Help="最大长度255个字符">
+                <TextArea @bind-Value="@context.Summary" MaxLength=@(255) AllowClear="true" DebounceMilliseconds=1000/>
+            </FormItem> 
+             <FormItem Label="引用地址" WrapperColSpan="12">
+                <Input @bind-Value="@context.Reference" MaxLength=@(255) AllowClear="true" DebounceMilliseconds=1000/>
+            </FormItem>   
+            </PageHeaderContent>
+      <PageHeaderFooter> 
+
+     </PageHeaderFooter>
+        </PageHeader>
+</Form>
+</ErrorBoundary> 

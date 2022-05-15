@@ -1,0 +1,12 @@
+﻿@namespace Udx.Cms.App.Components
+ <TreeSelect TItem="CmsCategoryTree" Style="width:100%;height:100vh;" 
+             DataSource="_categoryTree"
+             TitleExpression="x => x.Name"
+             ChildrenExpression="x => x.Items"
+             KeyExpression="x => x.Id"
+             IsLeafExpression="x => !x.Items.Any()"             
+			 @bind-Value="@Value" Placeholder="请选择分类"  
+             OnSelectedItemChanged="OnSelectedItemChangedHandler"
+             AllowClear TreeDefaultExpandAll
+             >
+</TreeSelect>

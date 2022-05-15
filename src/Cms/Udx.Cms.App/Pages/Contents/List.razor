@@ -1,0 +1,105 @@
+﻿@namespace Udx.Cms.App.Pages.Contents
+@inherits  UdxComponentBase
+@page "/cms/contents-list"
+ <ErrorBoundary> 
+            <div class="udx-tabs-inner-container"> 
+  <Layout Class="site-layout">
+          <Content>
+   <PageHeader Class="site-page-header">           
+        <!--avatar-->
+    <PageHeaderAvatar>
+         <Avatar Style="background-color: #00a2ae" Icon="book" />
+    </PageHeaderAvatar>
+    <!--title-->
+    <PageHeaderTitle>内容管理</PageHeaderTitle>
+
+    <!--subtitle-->
+    <PageHeaderSubtitle>内容编辑管理</PageHeaderSubtitle>
+        <!--extra-->
+        <PageHeaderExtra>
+            <Button Icon="@_SearchModel.FoldIcon" OnClick="_=>{_SearchModel.Change(); StateHasChanged();}">查询</Button>
+             <Button Icon="plus" Disabled='!RuleHelper.GetAction("新增")' OnClick="OnAddClick">新增</Button> 
+            </PageHeaderExtra>
+        <!--content-->
+        
+             <PageHeaderContent>
+                  <UdxSearch FetchModel="@_SearchModel"></UdxSearch>
+            </PageHeaderContent>
+    </PageHeader>
+    </Content>
+     <Layout>
+<Sider Theme="SiderTheme.Light" Style="background: #fff;overflow:auto;height:100%;"> 
+    <Udx.Cms.App.Pages.Categorys.CategoryEditTree
+     OnTreeSelect="OnTreeSelectAsync" />
+ </Sider>
+<Content Style="background: #fff;padding: 2px 5px 2px 5px;width:calc(100%)">    
+ 
+         
+    <AntList DataSource="@_QueryResponse.Data"  ItemLayout="ListItemLayout.Vertical" Size="small" 
+    >
+           <Header>
+               <Row Justify="start" Style="flex-flow: nowrap; padding:5px;text-align:center;font-weight:500">
+                <Col Flex=@("150px")>
+                    封面
+                </Col>
+                <Col Flex=@("500px") Class="padding">
+                    内容         
+                 </Col>                 
+                      <Col Flex=@("200px") Class="padding">
+                         修改
+                     </Col>
+                      <Col Flex=@("60px") >
+                           操作
+                     </Col>
+            </Row>
+           </Header>
+    <ChildContent Context="context">
+        <ListItem Class="udx-hover">
+             <Row Justify="start" Style="flex-flow: nowrap; padding:5px;">
+                <Col Flex=@("150px")>
+                    <img  style="width:300px;height:128px;object-fit:scale-down;display:block" src='@context.CoverImgUrl??"https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"'/>
+                    </Col>
+                     <Col Flex=@("500px")>
+                      <p><a href="@($"/cms/view/{context.Id}")" target="_blank"><b>@context.Title</b></a><br/></p>
+                      <p>分类:@context.CategoryId</p>
+                      <p>作者:@context.Author</p>
+                     <p> <Space><SpaceItem><Icon Type="fire" /></SpaceItem><SpaceItem>@context.BrowseCount</SpaceItem> </Space>
+                      <Space><SpaceItem><Icon Type="like" /></SpaceItem><SpaceItem>@context.LikeCount</SpaceItem> </Space>
+                      <Space><SpaceItem><Icon Type="message" /></SpaceItem><SpaceItem>@context.CommentCount</SpaceItem> </Space></p>
+               </Col>
+                     <Col Flex=@("200px")>
+           <p>创建人：@context.CreatedUserName    @context.CreatedTime </p>
+                 <p>修改人：@context.ModifiedUserName   @context.CreatedTime</p>
+                </Col>
+                      <Col Flex=@("60px") >
+                             <Space>
+                            <SpaceItem>
+                            <Button OnClick="()=> OnEditClick(context.Id)" Type="@ButtonType.Link" >编辑</Button>
+                            </SpaceItem>
+                            @if (RuleHelper.GetAction("删除"))
+                            { <SpaceItem>
+                                <Popconfirm Title="确定要删除吗?"
+                                OnConfirm="()=> OnDeleteClick(context.Id)"
+                                OkText="确定"
+                        
+                                CancelText="取消">               
+                                <Button  Type="@ButtonType.Link" >删除</Button>
+                                </Popconfirm>
+                            </SpaceItem>
+                             }  
+                             </Space>
+                     </Col>
+                     </Row>
+        </ListItem>
+    </ChildContent>
+    <Footer>
+           @if(!_QueryResponse.Data.Any()){<Empty />} 
+           
+              <UdxPager Model="@_SearchModel"></UdxPager>
+    </Footer>
+</AntList>   
+   </Content>   
+</Layout>   
+</Layout>
+</div>
+   </ErrorBoundary>

@@ -1,0 +1,128 @@
+﻿@namespace Udx.Admin.App.Pages.Users
+@using  Udx.Admin.Models
+@using  Udx.Models
+@page "/admin/users-list"
+@inherits UdxComponentBase
+        
+<ErrorBoundary>  
+     <div class="udx-tabs-inner-container">
+    <PageHeader Class="site-page-header">  
+    <!--avatar-->
+    <PageHeaderAvatar>
+         <Avatar Style="background-color: #00a2ae" Icon="user" />
+    </PageHeaderAvatar>
+    <!--title-->
+    <PageHeaderTitle>用户管理</PageHeaderTitle>
+
+    <!--subtitle-->
+    <PageHeaderSubtitle>用户信息设置</PageHeaderSubtitle>
+        <!--extra-->
+        <PageHeaderExtra>
+            <Button Icon="@_SearchModel.FoldIcon" OnClick="_=>{_SearchModel.Change(); StateHasChanged();}">查询</Button>  
+          @if (RuleHelper.GetAction("新增")){<Button Icon="plus" OnClick="OnAddClick">新增</Button> }
+          
+        <UdxImport Model="@_ImportModel"></UdxImport> 
+        <UdxExport Model="@_ExportModel"></UdxExport>
+<DropdownButton>
+    <Overlay>
+         <Menu>
+              @if (RuleHelper.GetAction("导入")){
+                 <MenuItem Key="import" OnClick="OnImportClick">
+                     导入新增                     
+                 </MenuItem>
+              }
+                   @if (RuleHelper.GetAction("导出")){
+                 <MenuItem Key="export" OnClick="OnExportClick">导出查询</MenuItem>
+                   }
+                 @if (RuleHelper.GetAction("重置密码"))
+                    {   
+                        <MenuItem Key="1">
+                         <Popconfirm Title="确定要重置密码吗?"
+                                    OnConfirm="()=> OnResetPwdClick()"
+                                    OkText="确定"                        
+                                    CancelText="取消">               
+                              重置密码
+                        </Popconfirm>
+                      </MenuItem>
+                    }
+          </Menu>
+    </Overlay>
+     <Unbound>
+        更多
+    </Unbound>
+</DropdownButton>
+
+    </PageHeaderExtra>
+
+        <!--content-->
+        
+             <PageHeaderContent>
+                  <UdxSearch FetchModel="@_SearchModel"></UdxSearch>
+            </PageHeaderContent>
+    </PageHeader>
+     <Spin Spinning=loading >
+     <Table  @bind-PageSize="_SearchModel.PageSize" HidePagination Bordered  
+           TItem="UserListOutput"
+            DataSource="@_QueryResponse.Data"
+           @bind-SelectedRows="_SelectedRows"
+           >
+           <ChildContent>
+        <Selection Key="@context.Id" Type="checkbox" Width="40px" Fixed="left" />
+        <Column Title="ID" @bind-Field="context.Id" Hidden="true"  Width="100px"/>
+        <Column Title="头像" @bind-Field="context.Avatar"  Width="128px">
+             <img  style="width:64px;height:64px;object-fit:scale-down;display:block" src="@(context.Avatar??"images/user.png")" />
+        </Column>        
+        <Column Title="账号" @bind-Field="context.UserName" Filterable  Sortable Fixed="Left" Width="100px"/>
+         <Column Title="姓名" @bind-Field="context.Name" Width="120px"/>
+        <Column Title="昵称" @bind-Field="context.NickName" Width="120px"/>
+        <Column Title="状态" @bind-Field="context.Status" Sortable Filterable  Width="100px"/>
+          <Column Title="数据权限" @bind-Field="context.IsAdmin" Sortable Filterable  Width="120px">
+              @if(context.IsAdmin=="是")
+              {
+                   <Tag Color="success">超级权限</Tag>
+              }
+              </Column>
+         <Column Title="创建人" @bind-Field="context.CreatedUserName"    Sortable Width="120px"/>
+        <Column Title="创建时间" @bind-Field="context.CreatedTime" Format="yyyy-MM-dd" Sortable Width="180px"/>
+        <Column Title="修改时间" @bind-Field="context.ModifiedTime" Format="yyyy-MM-dd" Sortable Width="180px"/>
+        <Column Title="描述"   @bind-Field="context.Description" /> 
+
+          <ActionColumn Title="操作" Width="150" >
+           <Space>
+               <SpaceItem>
+
+              
+              <Dropdown >
+    <Overlay>       
+       <Menu Class="menu" Mode=MenuMode.Horizontal> 
+         @if (RuleHelper.GetAction("编辑")) { <MenuItem ><Button  OnClick="() => OnEditClick(context)" Type="@ButtonType.Link">编辑</Button></MenuItem>}
+         @if (RuleHelper.GetAction("删除")) { <MenuItem  >  
+            <Popconfirm Title="确定要删除吗?"
+                        OnConfirm="()=> OnDeleteClick(context)"
+                        OkText="确定"
+                        
+                        CancelText="取消">               
+                   <Button  Type="@ButtonType.Link">删除</Button>
+            </Popconfirm>
+        </MenuItem>}
+      
+     </Menu>
+    </Overlay>
+ <ChildContent>
+           <Button  Type="@ButtonType.Link">操作<Icon Type="down" /></Button>
+    </ChildContent>
+</Dropdown>
+ </SpaceItem>
+ 
+   @if (RuleHelper.GetAction("角色权限")) { <SpaceItem><Button OnClick="() => OnRoleSelectClick(context)" Type="@ButtonType.Link">角色</Button></SpaceItem>}
+   
+           </Space>
+    </ActionColumn>
+        </ChildContent>  
+   
+   </Table></Spin>
+   <UdxPager Model="@_SearchModel"></UdxPager>
+   </div>
+   </ErrorBoundary> 
+   
+

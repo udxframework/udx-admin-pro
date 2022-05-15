@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Udx.Admin.App": {
+      "commandName": "Project",
+      "jsWebView2Debugging": true,
+      "nativeDebugging": true
+    }
+  }
+}

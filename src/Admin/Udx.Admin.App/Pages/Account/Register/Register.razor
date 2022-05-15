@@ -1,0 +1,45 @@
+﻿@namespace Udx.Admin.App.Pages.Account
+@layout SiteLayout
+@page "/account/register"
+ @attribute [ReuseTabsPage(Title="注册用户",Ignore=true)]
+  <PageTitle>@(AppSetting.UdxSettings.SiteTitle)-注册用户</PageTitle>
+<div class="page-account page-account-login">
+    <div class="page-account-container">   
+<Card Title=@("注册用户") Style="width:400px;">
+<Form Loading="loading" Model="@_model" 
+      OnFinish="OnFinish" 
+      OnFinishFailed="OnFinishFailed"
+      LabelColSpan="6"
+      WrapperColSpan="18"
+>
+       <FormItem Label="姓名" >
+        <Input @bind-Value="@context.Name" DebounceMilliseconds=1000/>
+    </FormItem>
+     <FormItem Label="昵称" >
+        <Input @bind-Value="@context.NickName" DebounceMilliseconds=1000/>
+    </FormItem>
+    <FormItem Label="登录名" >
+        <Input @bind-Value="@context.UserName" DebounceMilliseconds=1000/>
+    </FormItem>
+    <FormItem Label="密码">
+        <InputPassword @bind-Value="@context.Password" DebounceMilliseconds=1000/>
+    </FormItem>
+    <FormItem Label="确认密码">
+        <InputPassword @bind-Value="@context.ConfirmPassword" DebounceMilliseconds=1000/>
+    </FormItem>
+    
+   
+    <FormItem LabelColSpan="0"
+      WrapperColSpan="24">
+        <Button Type="@ButtonType.Primary" HtmlType="submit" Class="submit" Size="large" Block>
+            注&nbsp;册
+        </Button> 
+         <AntDesign.Tooltip>@context.MessageInfo</AntDesign.Tooltip>
+                <br />
+                <Button Type="link"  OnClick="GotoLogin" Block>已有账号登录</Button>
+    </FormItem>
+</Form>
+  </Card>
+
+    </div>
+</div>

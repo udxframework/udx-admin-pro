@@ -1,0 +1,101 @@
+﻿@namespace Udx.Admin.App.Pages.Configs
+@inherits  UdxComponentBase 
+  <div>   
+<Space Size="@($"0")" Style="margin:5px 0px 10px 0px;">
+    <SpaceItem>
+        <Search @bind-Value="@searchKey" Placeholder="Search.." />
+    </SpaceItem>
+    <SpaceItem>
+         <Tooltip Title=@("刷新")>
+            <Button Icon="reload" OnClick="OnSearchAsync" />
+        </Tooltip>
+    </SpaceItem>
+    <SpaceItem>
+         <Tooltip Title=@("增加根目录")>
+            <Button Icon="Plus" Disabled='!RuleHelper.GetAction("新增")' OnClick="_=>OnTreeAddClick(null)" />
+        </Tooltip>
+    </SpaceItem>
+</Space>
+          <Tree ShowLine  TItem="ConfigTree"
+	            SwitcherIcon="down"
+                DefaultExpandAll="@true"
+                MatchedClass="site-tree-search-value"
+                SearchValue="@searchKey"
+                DataSource="_TreeData"
+                TitleExpression="x => x.DataItem.Name"
+                 KeyExpression="x => x.DataItem.Id"
+                IsLeafExpression="x => !x.DataItem.Items.Any()"  
+                ChildrenExpression="x => x.DataItem.Items"  
+                
+                OnSelect="OnTreeSelectAsync"
+                TitleTemplate="nodeTemplateRender">
+	        <SwitcherIconTemplate>
+		        <Icon Type="down" />
+	        </SwitcherIconTemplate>
+    </Tree>     
+
+<DynamicComponent Type="type"  @ref="@_categoryEditForm" />
+</div>
+@code {
+   private  RenderFragment nodeTemplateRender(TreeNode<ConfigTree> content){       
+      RenderFragment fragmen=  @<div class="ant-tree-title">
+                    <div style="float:left">
+                        @content.Title
+                    </div>
+                    <div style="width:30px;float:right">                            
+                            <Popover Placement="@Placement.Right">  
+                               <ChildContent>
+                                    <span class="hoverDisplay">
+                                        <Icon Type="more"></Icon>
+                                    </span>
+                                </ChildContent>
+                                <ContentTemplate>
+                                <Menu>
+                                    <MenuItem>
+                                        <Button Icon="plus"  Disabled='!RuleHelper.GetAction("新增")' Style="border-width:0px" @onclick="()=>OnTreeAddClick(content)">新建下级</Button>
+                                    </MenuItem>
+                                    <MenuItem>
+                                       <Button Icon="edit"  Disabled='!RuleHelper.GetAction("编辑")' Style="border-width:0px" @onclick="()=>OnTreeEditClick(content)">编辑当前</Button>
+                                    </MenuItem>
+                                     <MenuDivider/>
+                                    <MenuItem>
+                                         <Popconfirm Title="确定要删除吗?"
+                                                    OnConfirm="()=> OnTreeDeleteClick(content)"
+                                                    OkText="确定"                        
+                                                    CancelText="取消">               
+                                            <Button Icon="delete"  Disabled='!RuleHelper.GetAction("删除")' Style="border-width:0px">删除当前</Button>
+                                        </Popconfirm>
+                                    </MenuItem>
+                                </Menu>
+                                </ContentTemplate>
+                            </Popover>
+                    </div>
+    </div>
+      ;
+        return fragmen;
+
+                }
+ }
+<style>
+    
+
+    .ant-tree .ant-tree-node-content-wrapper {
+        width: 100%;
+    }
+     .ant-tree .ant-tree-node-content-wrapper:hover .hoverDisplay {
+        background-color: #f5f5f5;
+        display: inline;
+    }
+
+    .ant-tree .ant-tree-node-content-wrapper:hover .hoverDisplay:hover {
+        color: #1890ff;
+        /*background-color: aquamarine*/
+    }
+
+    .hoverDisplay {
+       display: none;
+    }
+        .site-tree-search-value {
+    color: #f50;
+}
+</style>

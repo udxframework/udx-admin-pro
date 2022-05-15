@@ -1,0 +1,45 @@
+﻿@using Udx.Configs
+@using AntDesign;
+@namespace Udx.Admin.App.Shared
+<Row Style="flex-flow: nowrap; height: 64px;background: #fff;" OnBreakpoint="OnBreakpoint">
+        <Col Flex=@("none")>
+            <h1>
+                <a  class="udx-logo" href="/" >
+                    <UdxLogo/> @AppSetting.UdxSettings.SubTitle.RenderFragment()
+                </a>
+            </h1>
+
+             </Col>
+         <Col Flex=@("auto")  >
+       @* @if (_isMobile)
+        {
+            <Dropdown Placement="Placement.BottomRight" Trigger="new[] { Trigger.Click }" >
+                <Overlay>
+                    <AdminHeaderMenu IsMobile />
+                </Overlay>
+                <ChildContent>
+                    <Icon Type="unordered-list" Theme="outline" Style="margin-left:10px"/>
+                </ChildContent>
+            </Dropdown>
+        }
+        else
+        {
+          <AdminHeaderMenu IsMobile="false" />           
+        }  *@      
+        </Col>
+         <Col Flex=@("none") Style="text-align:right;margin-right:10px">
+             <LoginDisplay/>
+        </Col>
+    </Row>
+<style>
+.udx-logo {
+    font-family: "official",Arial,"Microsoft Yahei","Helvetica Neue",Helvetica Neue,Helvetica,Lantinghei SC,Hiragino Sans GB,sans-serif; 
+    color:#000;
+    background: #fff;
+    display:inline;
+}
+.udx-logo a a:hover {
+    color: #000;
+}
+
+</style>

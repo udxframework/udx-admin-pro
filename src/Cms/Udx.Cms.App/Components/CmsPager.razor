@@ -1,0 +1,10 @@
+﻿@namespace Udx.Cms.App.Components
+<Pagination Style="width:100%;text-align:center;" 
+        ShowTotal="showTotal"
+        @bind-Total="Model.RowsCount"
+           @bind-Current="Model.CurrentPage"
+           @bind-PageSize="Model.PageSize"  
+        OnChange="HandlePageChange"
+        OnShowSizeChange="HandlePageChange"
+        HideOnSinglePage=@true
+ />

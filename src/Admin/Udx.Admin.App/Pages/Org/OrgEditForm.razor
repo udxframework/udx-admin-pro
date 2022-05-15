@@ -1,0 +1,54 @@
+﻿@namespace Udx.Admin.App.Pages.Orgs
+@inherits  UdxComponentBase 
+ <Modal Title="组织机构信息"   Visible="@Visible" 
+      OnOk="@HandleOk"
+     OnCancel="@HandleCancel" OkText=@("保存")   
+       
+     Style="min-width:800px" Draggable=true>   
+       <Form Model="@_EditModel" @ref="_Form"
+           Size="@AntSizeLDSType.Default"
+            OnFinish="OnSaveClick"
+      OnFinishFailed="OnSaveFailed"
+      LabelColSpan="4">
+      <Spin Spinning=_loading> 
+       <Row Gutter="24">
+           
+          
+              <GridCol Span="12">
+             <FormItem Label="Id"   >
+                <Input @bind-Value="@context.Id" ReadOnly DebounceMilliseconds=1000/>
+            </FormItem>
+             </GridCol><GridCol Span="12"> <FormItem Label="父Id"   >
+                <Input @bind-Value="@context.ParentId" AllowClear="true" DebounceMilliseconds=1000/>
+            </FormItem></GridCol>
+              <GridCol Span="12">
+            <FormItem Label="机构名称"   >
+                <Input @bind-Value="@context.OrgName" AllowClear="true" AutoFocus DebounceMilliseconds=1000/>
+            </FormItem> 
+            </GridCol> 
+              <GridCol Span="12">
+             <FormItem Label="机构代码"   >
+                <Input @bind-Value="@context.OrgCode" AllowClear="true" DebounceMilliseconds=1000/>
+            </FormItem>  </GridCol>            
+              <GridCol Span="12">
+            <FormItem Label="状态"  >
+                <SimpleSelect @bind-Value="@context.Status" DefaultValue="禁用" >
+                    <SelectOptions>
+                        <SimpleSelectOption Value="启用" Label="启用"></SimpleSelectOption>
+                        <SimpleSelectOption Value="禁用" Label="禁用"></SimpleSelectOption>
+                    </SelectOptions>
+                </SimpleSelect>
+            </FormItem>  </GridCol>
+              <GridCol Span="12">
+             <FormItem Label="排序"   >
+                <Input @bind-Value="@context.Sort" AllowClear="true" DebounceMilliseconds=1000/>
+            </FormItem>  </GridCol>
+              <GridCol Span="24">
+            <FormItem Label="备注"   LabelColSpan="2" >
+                <TextArea @bind-Value="@context.Description" AllowClear="true"/>
+            </FormItem> </GridCol>
+              <GridCol Span="24"> <Alert Type="@AlertType.Info" Description="@context.MessageInfo"/> </GridCol>
+            </Row>
+            </Spin>
+               </Form>
+</Modal>

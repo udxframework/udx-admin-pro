@@ -1,0 +1,22 @@
+﻿@using AntDesign.Select
+@namespace Udx.Admin.Components
+<Select Mode="multiple"
+        DataSource="@Items"
+        @bind-Values="@_selectedValues"
+        ValueName="@nameof(UserModel.Id)"
+		LabelName="@nameof(UserModel.Name)"
+        Bordered="@Bordered"
+        OnSelectedItemsChanged="OnSelectedItemsChangedHandler">
+    <LabelTemplate>
+        <LabelTemplateItem Context="item"
+                           TItem="UserModel"
+                           TItemValue="string"
+                           Style="border:none"
+                           RemoveIconStyle="background-color: #EEEEEE;color: #FFFFFF; border-radius: 8px;margin-left: -5px;display: inline-block;height:16px;width:16px;font-size: 16px;line-height: 16px;">
+            <LabelTemplateItemContent>
+                <span style="background-color:#EEEEEE;border: 1px solid #EEEEEE;border-radius: 12px;">@((item as UserModel).Name)</span>
+            </LabelTemplateItemContent>
+        </LabelTemplateItem>
+    </LabelTemplate>
+</Select>
+@*<Icon Type="plus" Style="font-size: 24px;color: #666666;border: 1px dashed #666666;border-radius: 12px;" Theme="outline"  />*@

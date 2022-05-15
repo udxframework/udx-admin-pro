@@ -1,0 +1,77 @@
+﻿@namespace Udx.Admin.Components
+
+@if (FetchModel.Visibility)
+{
+<Form @ref="@FetchModel.Form" Model="@FetchModel.FilterItems" OnFinish="@FetchModel.OnSearch" Name="advanced_search" Class="ant-advanced-search-form">
+    <Row Gutter="24">
+        @foreach (var item in FetchModel.FilterItems.Where(l=>l.IsShow))
+        {
+            <GridCol Span="@item.ColSpan">
+                   <FormItem Label="@item.Caption">
+                    @if(item.Type== FilterType.DateTime)
+                    {
+                            <DatePicker @bind-Value="@item.Value" AllowClear="true"/>
+
+                    }
+                     else if(item.Type== FilterType.Year)
+                    {
+                            <DatePicker @bind-Value="@item.Value" Picker="@DatePickerType.Year" AllowClear="true"/>
+                    }
+                     else if(item.Type== FilterType.Month)
+                    {
+                            <DatePicker @bind-Value="@item.Value" Picker="@DatePickerType.Month" AllowClear="true"/>
+                    }                     
+                  
+                    else if(item.Type== FilterType.Select)
+                    {
+                            
+                             <Select Mode="default"
+                                DataSource="@item.DataSource" 
+		                        @bind-Value="@item.Value"
+		                        ValueName="@nameof(ConfigOption.Value)"
+		                        LabelName="@nameof(ConfigOption.Key)"
+		                        DisabledName="@nameof(ConfigOption.Disabled)"
+		                     AllowClear="true">
+                           </Select>
+                    }
+                     else if(item.Type== FilterType.MultSelect)
+                    {
+                            
+                             <Select Mode="multiple"
+                                DataSource="@item.DataSource" 
+		                       @bind-Values="@item.SelectValue"
+                               MaxTagCount="1"
+                                	TItemValue="string"
+                                    	TItem="ConfigOption"
+		                        ValueName="@nameof(ConfigOption.Value)"
+		                        LabelName="@nameof(ConfigOption.Key)"
+		                        DisabledName="@nameof(ConfigOption.Disabled)"
+		                     AllowClear="true">
+                           </Select>
+                    }
+                       else if(item.Type== FilterType.ConfigSelect)
+                    {                            
+                             
+                           <UdxConfigSelect  @bind-Value="@item.Value" ConfigKey="@item.ConfigKey" Mode="default" />
+                    }
+                     else if(item.Type== FilterType.ConfigMultSelect)
+                    {                            
+                             
+                           <UdxConfigSelect  @bind-Value="@item.Value" ConfigKey="@item.ConfigKey" Mode="multiple" />
+                    }
+
+                    else
+                    {
+                            <Input @bind-Value="@item.Value" AllowClear="true" DebounceMilliseconds=1000/>
+                            
+                    }
+                    </FormItem>
+            </GridCol>
+        }
+        <GridCol Span="@QueryColSpan" Style="text-align:right;">
+            <Button Type="@ButtonType.Primary" HtmlType="submit" Icon="search">搜索</Button>
+            <Button Style="margin: 0 8px;" Type="@ButtonType.Dashed" HtmlType="reset" OnClick="@FetchModel.OnReset">重置</Button>
+        </GridCol>
+    </Row>
+</Form>
+}

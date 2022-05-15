@@ -1,0 +1,45 @@
+﻿@namespace  Udx.Admin.App.Components
+@using  Udx.Admin.App.Models;
+@inherits UdxFeedbackComponent<ModuleDialogModel, List<RoleModuleModel>>
+
+<div class="container">
+    <Spin Spinning=Loading>      
+    
+    <Table   TItem="RoleModuleTree" Size="@TableSize.Small"  Title="@Options.Name" ScrollY="600"
+           DataSource="Datas"  TreeChildren="item=>item.Items" HidePagination="@true" DefaultExpandAllRows="@true">
+       <Column @bind-Field="@context.Checked" Title="选择"  Width="100"  >
+            <TitleTemplate>
+            <span> <input type="checkbox" name="modules" id="ModuleAllChecked"  checked=@ModuleAllChecked  @onchange="eventArgs => { ModuleAllOnChange(context, eventArgs.Value); }"/>    
+             <label for="@ModuleAllChecked">全选</label>
+             </span>
+            </TitleTemplate>
+            <ChildContent>
+              <input type="checkbox" name="modules" id="@context.Id" value="@context.Id"  checked=@context.Checked @onchange="eventArgs => { ModuleOnChange(context, eventArgs.Value); }"/>
+              </ChildContent>
+        </Column>
+        <Column @bind-Field="@context.Name" Title="模块名称" Width="120" FilterMultiple  />  
+          <Column @bind-Field="@context.ActionList" Title="模块Actions"   Ellipsis >
+               <TitleTemplate>
+            <span> <input type="checkbox" name="actions" id="ActionAllChecked"  checked=@ActionAllChecked  @onchange="eventArgs => { ActionAllOnChange(context, eventArgs.Value); }"/>    
+             <label for="@ActionAllChecked">模块Actions</label>
+             </span>
+            </TitleTemplate>
+            <ChildContent>
+           <Space Size=@("middle")>
+              @foreach (var item in context.ActionList)
+              {
+                    var cid = System.Guid.NewGuid().ToString();
+                   <SpaceItem>
+                     <input type="checkbox" name="@(context.Id)-actions" id="@cid" value="@item.Value"  checked=@item.Checked @onchange="eventArgs => { ActionOnChange(context,item, eventArgs.Value); }"/>
+                     <label for="@cid">@item.Label</label>
+                  </SpaceItem>                 
+              } 
+              </Space>
+               </ChildContent>
+         </Column>
+         <Column @bind-Field="@context.ModuleType" Title="系统模块" Width="80" />   
+        <Column @bind-Field="@context.Path" Title="路由Path"  Width="250" />        
+    </Table>
+    </Spin>
+</div>
+

@@ -1,0 +1,26 @@
+﻿
+@namespace Udx.Admin.App.Pages.Account.Settings
+@inherits  UdxComponentBase
+
+
+    <Form Model="@model"
+          OnFinish="OnFinish"
+          LabelColSpan="4"
+          WrapperColSpan="8">
+        <FormItem Label="旧密码">
+            <InputPassword @bind-Value="@context.OldPassword" DebounceMilliseconds =1000/>
+        </FormItem>
+        <FormItem Label="新密码">
+            <InputPassword @bind-Value="@context.Password" DebounceMilliseconds =1000 />
+        </FormItem>
+        <FormItem Label="确认新密码">
+            <InputPassword @bind-Value="@context.ConfirmPassword" DebounceMilliseconds =1000/>
+        </FormItem>
+        <FormItem WrapperColOffset="4" WrapperColSpan="8">
+            <Button Type="@ButtonType.Primary" HtmlType="submit">
+                确认
+            </Button>
+        </FormItem>
+    </Form>
+
+

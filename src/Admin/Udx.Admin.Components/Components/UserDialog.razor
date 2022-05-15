@@ -1,0 +1,45 @@
+﻿@namespace Udx.Admin.Components
+
+@using Udx.Models
+@inherits UdxFeedbackComponent<DialogModel, List<UserModel>>
+
+<div class="container">
+    <Row Gutter="(16,24)" Style="padding:12px 0;margin:0;border-bottom: 1px solid #eeeeee;">
+        <Col Style="line-height:32px;">
+        <label class="label has-text-right">用户名:</label>
+        </Col>
+        <Col class="column">
+        <Input TValue="string" @bind-Value="@Value1" AllowClear="true" DebounceMilliseconds=1000/>
+        </Col>
+
+        <Col Style="line-height:32px;">
+        <label class="label has-text-right">名称:</label>
+        </Col>
+        <Col class="column">
+        <Input TValue="string" @bind-Value="@Value2" AllowClear="true" DebounceMilliseconds=1000/>
+        </Col>
+        <Col class="column">
+        <div class="control">
+            <Button OnClick="@OnClick" Type="primary">查询</Button>
+        </div>
+        </Col>
+    </Row>
+
+    <Table 
+            @ref="table"
+           TItem="UserModel"
+           DataSource="@_QueryResponse.Data"
+           @bind-Total="_QueryResponse.RowsCount"
+           @bind-PageIndex="_QueryResponse.CurrentPage"
+           @bind-PageSize="_QueryResponse.PageSize"
+           @bind-SelectedRows="selectedRows"
+           OnRowClick="item=>OnRowClick(item)"
+           Size=@TableSize.Small
+           ScrollY="300">
+        <Selection Key="@(context.Id)" Type="@this.Options.SelectType" />
+        <Column @bind-Field="@context.UserName" Title="用户名" Width="100" Ellipsis />
+        <Column @bind-Field="@context.Name" Title="名字" Width="100" Ellipsis />
+        <Column @bind-Field="@context.NickName" Title="别名" Width="100" Ellipsis />
+    </Table>
+</div>
+

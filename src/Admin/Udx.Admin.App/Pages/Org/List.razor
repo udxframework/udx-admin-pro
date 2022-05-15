@@ -1,0 +1,80 @@
+﻿@namespace Udx.Admin.App.Pages.Orgs
+@inherits  UdxComponentBase
+@page "/admin/orgs-list"
+  <ErrorBoundary> 
+       <Layout>
+          <Content>
+               <PageHeader Class="site-page-header">           
+        <!--avatar-->
+    <PageHeaderAvatar>
+         <Avatar Style="background-color: #00a2ae" Icon="apartment" />
+    </PageHeaderAvatar>
+    <!--title-->
+    <PageHeaderTitle>组织机构</PageHeaderTitle>
+
+    <!--subtitle-->
+    <PageHeaderSubtitle>组织机构设置</PageHeaderSubtitle>
+        <!--extra-->
+        <PageHeaderExtra>
+            <div class="udx-page-header-extra-fixed">
+                   
+                    </div>
+                       
+        </PageHeaderExtra>
+
+     </PageHeader>
+              </Content>
+<Layout>
+<Sider Theme="SiderTheme.Light" Style="background: #fff;overflow:auto;height:calc(100vh - 250px);"> 
+    <OrgEditTree OnTreeSelect="OnTreeSelectAsync" />
+ </Sider>
+<Content Style="background: #fff;padding: 2px 5px 2px 5px;width:calc(100%)">   
+       
+      <Card Size="small" Title="组织机构用户" >
+        <Extra>
+             <h4> @_selectedTreeData?.OrgName</h4>
+        </Extra>
+        <Body>
+           
+            <Table 
+                   @ref="table"
+                   TItem="OrgUserModel"
+                   DataSource="@_OrgUserList"
+                   Bordered=@true Size=@TableSize.Middle
+                    PageSize="500"
+                  Style="overflow:auto;width:calc(100vh - 300px)"
+           >
+        <Column Title="ID" @bind-Field="context.Id" Hidden="true"  Width="100px"/>              
+        <Column Title="账号" @bind-Field="context.UserName" Filterable  Fixed="Left" Width="100px"/>
+        <Column Title="姓名" @bind-Field="context.Name" Width="80px"/>
+         <Column Title="创建人" @bind-Field="context.CreatedUserName"    Sortable Width="120px"/>
+        <Column Title="创建时间" @bind-Field="context.CreatedTime" Format="yyyy-MM-dd" Sortable Width="100px"/>
+        <Column Title="修改时间" @bind-Field="context.ModifiedTime" Format="yyyy-MM-dd" Sortable Width="100px"/>  
+         <ActionColumn Title="操作" Width="150" >
+             <TitleTemplate>
+                  @if (RuleHelper.GetAction("选择用户"))
+                            {
+                                <Button  OnClick="OnAddDetailClick">选择用户</Button>
+                            }
+             </TitleTemplate>
+             <ChildContent>
+                    @if (RuleHelper.GetAction("删除用户"))
+                            {
+                                <Popconfirm Title="确定要删除吗?"
+                        OnConfirm="()=> OnDeteteDetailClickAsync(context)"
+                        OkText="确定"                        
+                        CancelText="取消">               
+                         <Button Type="@ButtonType.Link" >删除</Button>
+                      </Popconfirm>
+                            }
+
+             </ChildContent>
+                 
+                    </ActionColumn>
+   </Table>
+       </Body>
+    </Card>  
+ </Content>
+</Layout>
+</Layout>
+</ErrorBoundary>  

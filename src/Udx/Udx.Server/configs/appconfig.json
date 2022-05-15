@@ -1,0 +1,38 @@
+{
+  //Api地址
+  "urls": [ "http://localhost:9200", "https://localhost:9201" ],
+  //客户端地址
+  "clientUrl": "http://localhost:5401",
+  //跨域地址
+  "corUrls": [ "http://*:9000" ],
+  //租户类型：None无租户, Share共享数据库, Own独立数据库
+  "tenantType": "None",
+  //Swagger文档
+  "swagger": false,
+  //统一认证授权服务器
+  "IdentityServer": {
+    //启用
+    "enable": false,
+    //地址，开发认证地址前往appconfig.Development.json修改
+    "url": "https://login.udx.cn"
+  },
+  //面向切面编程
+  "aop": {
+    //事物
+    "transaction": true
+  },
+  //日志
+  "log": {
+    //操作日志
+    "operation": true
+  },
+  //限流
+  "rateLimit": false,
+  //验证码
+  "varifyCode": {
+    //启用
+    "enable": true,
+    //字体列表
+    "fonts": [ "Times New Roman", "Verdana", "Arial", "Gungsuh", "Impact" ]
+  }
+}

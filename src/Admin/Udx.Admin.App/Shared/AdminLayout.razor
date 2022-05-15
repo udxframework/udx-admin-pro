@@ -1,0 +1,109 @@
+﻿@namespace Udx.Admin.App.Shared
+@inherits LayoutComponentBase
+@inject HttpClient HttpClient
+@code
+{
+     RenderFragment title(RuleModule module) => @<span>
+                                                @if (!string.IsNullOrEmpty(module.Icon))
+                                                {
+                                                    <Icon Type="@module.Icon" Theme="outline" />
+                                                }
+                                                <span>@module.Name</span>
+                                            </span>;
+
+    RenderFragment menuItemTemplate(List<RuleModule> modules, bool isChildren) =>
+        @<Template>
+            @if (modules != null)
+            {
+                @foreach (var menuItem in modules)
+                {
+                    if (menuItem.Modules != null && !menuItem.HideInMenu)
+                    {
+                        <SubMenu TitleTemplate="@title(menuItem)" Key="@menuItem.Key">
+                            @menuItemTemplate(menuItem.Modules, true)
+                        </SubMenu>
+                    }  
+                    else if (!menuItem.HideInMenu)
+                    {
+                        <MenuItem Key="@menuItem.Key">
+                            <MenuLink href="@menuItem.Path" >@title(menuItem)</MenuLink>
+                        </MenuItem>
+                    }                 
+                }
+            }
+        </Template>;
+}
+<PageTitle>@(AppSetting.UdxSettings.SiteTitle)-协同管理</PageTitle>
+<div>
+<Layout Class="site-layout-background">
+         <Header Class="fixed-top" Style="height: 65px;background: #fff;margin: 0px;padding: 0px 5px 0px 1px;">
+            <AdminHeader/>
+        </Header>
+        <Layout Style="background: #fff;margin-top:65px;padding:0px" Class="site-layout-background">         
+        <Sider Collapsible Collapsed=@collapsed OnCollapse=@onCollapse NoTrigger  Theme="SiderTheme.Light" Style="overflow:auto;overflow-x:hidden;height:calc(100vh - 65px);"> 
+            <Menu Theme="MenuTheme.Light"  Mode="MenuMode.Inline"   Class="site-layout-background" Style="margin-bottom:80px;">
+                @menuItemTemplate(MenuData, false)
+                </Menu>
+                <br/> 
+             <Space  Style="position: fixed;bottom:0;left:0;z-index:51;width:60px;background-color:#FFF"  Direction="DirectionVHType.Vertical">
+                      @if (collapsed)
+            {
+              <SpaceItem> <Icon Type="menu-unfold" Theme="outline" Class="trigger" OnClick="toggle" /></SpaceItem> 
+            }
+            else
+            {
+              <SpaceItem> <Icon Type="menu-fold" Theme="outline" Class="trigger" OnClick="toggle" /></SpaceItem> 
+            }
+            @*<SpaceItem><LoginDisplay /></SpaceItem>*@
+            </Space>
+        </Sider>
+        <Layout>
+        <Content Class="site-layout-background" Style="background: #fff;">   
+            <div id="admin-tabs" class="admin-tabs-outer-container">
+            <ReuseTabs />
+            <BackTop></BackTop>
+            </div>
+        </Content>        
+    </Layout>
+    </Layout>
+</Layout>
+</div>
+<style>
+    html{overflow:hidden;}
+    .admin-tabs-outer-container {
+    width: calc(100%);
+    height: calc(100vh - 65px);
+    position: relative;
+    overflow: hidden;
+}
+#admin-tabs > div > div.ant-tabs-content-holder{
+    position: absolute;
+    left: calc(5px);
+    top: calc(45px);
+    right: calc(0px);
+    bottom:0px;
+    overflow: auto;
+    }
+    .trigger {
+        font-size: 18px;
+        line-height: 42px;
+        padding: 0 24px;
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+    .trigger:hover {
+        color: #1890ff;
+    }
+    .logo {
+        height: 64px;
+        background: #000;
+        margin: 1px;
+    }
+    .site-layout .site-layout-background {
+        background: #fff;
+    }
+   
+    div ::deep .ant-tabs-nav {
+    margin: 0 0 0px 0;
+    }
+</style>

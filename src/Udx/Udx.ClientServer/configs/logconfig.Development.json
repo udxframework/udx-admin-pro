@@ -1,0 +1,46 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Warning"
+    }
+  },
+  "Serilog": {
+    "Using": [
+      //"Serilog.Sinks.Console",
+     // "Serilog.Sinks.Seq",
+      "Serilog.Sinks.File"
+    ],
+    "MinimumLevel": {
+      "Default": "Debug",
+      "Override": {
+        "Microsoft.AspNetCore": "Warning"
+      }
+    },
+    "WriteTo": [
+      //{
+      //  "Name": "Console"
+      //},
+      {
+        "Name": "File",
+        "Args": {
+          "path": "logs/log.log",
+          //"outputTemplate": "{Timestamp:o} [{Level:u3}] ({Application}/{MachineName}/{ThreadId}/{ThreadName}) {Message}{NewLine}{Exception}",
+          "outputTemplate": "{Timestamp:HH:mm} || {Level} || {SourceContext:l} || {Message} || {Exception} ||end {NewLine}",
+          "rollingInterval": "Day",
+          "fileSizeLimitBytes": "10485760",
+          "retainedFileCountLimit": 5,
+          "rollOnFileSizeLimit": true
+        }
+      }
+      //{
+      //  "Name": "Seq",
+      //  "Args": {
+      //    "serverUrl": "http://localhost:5341",
+      //    "apiKey": "none"
+      //  }
+      //}
+    ]
+  }
+}

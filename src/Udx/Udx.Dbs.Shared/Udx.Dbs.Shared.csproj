@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFramework>net6.0</TargetFramework>
+	  <ImplicitUsings>enable</ImplicitUsings>
+	  <Version>0.1.0</Version>
+	  
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Admin\Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Udx.Shared" Version="2022.5.4" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,13 @@
+@using Udx.App.Pages.Exception
+<Error>
+ <Router AppAssembly="@typeof(Program).Assembly" AdditionalAssemblies="Startup.GetUdxAppAssembly()" >
+    <Found Context="routeData">
+        <ReuseTabsRouteView RouteData="@routeData" DefaultLayout="@Startup.DefaultLayout" />
+    </Found>
+    <NotFound>
+        <p>Sorry, there's nothing at this address.</p>
+    </NotFound>
+</Router>
+
+<AntContainer />   
+</Error>

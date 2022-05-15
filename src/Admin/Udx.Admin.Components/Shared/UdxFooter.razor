@@ -1,0 +1,13 @@
+﻿@namespace Udx.Admin.Components
+ <Footer Style="@Style" Class="@Class">
+ @if(Udx.Configs.AppSetting.UdxSettings.FooterLinks == "UdxLinks")
+{
+    <UdxLinks/>
+}
+    <Divider/>
+     <section>
+     @Copyright
+     @FooterContent
+     </section>
+    <BackTop></BackTop>
+ </Footer>

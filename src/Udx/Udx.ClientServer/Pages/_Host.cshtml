@@ -1,0 +1,39 @@
+﻿@page "/_Host"
+@namespace Udx.ClientServer.Pages
+@using Microsoft.AspNetCore.Components.Web
+@using Udx.Configs
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" /> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="referrer" content="unsafe-url" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>@AppSetting.UdxSettings.SiteTitle</title>
+    <base href="~/" />
+    <link href="css/app.css" rel="stylesheet" />
+    <link href="_content/AntDesign/css/ant-design-blazor.css" rel="stylesheet" />
+    <link rel="stylesheet" href="dist/frappe-gantt.css" />
+    <link href="Udx.ClientServer.styles.css" rel="stylesheet" />    
+    <link rel="apple-touch-icon" sizes="512x512" href="images/udx.svg" />
+    <link rel="apple-touch-icon" sizes="192x192" href="images/udx.svg" />    
+    <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
+</head>
+<body>
+    <app id="app">
+        <component type="typeof(Udx.Client.App)" render-mode="Server"/>
+    </app>
+    <script src="js/js.cookie.min.js"></script>
+    <script src="_content/AntDesign/js/ant-design-blazor.js"></script>
+    <link rel="stylesheet" href="Vditor/index.css" />
+    <script src="Vditor/index.min.js" defer></script>
+    <script src="Vditor/vditor-blazor.js"></script>
+    <script type="text/javascript" src="Vditor/wangEditor.min.js"></script>
+    <script src="Vditor/g2plot.js"></script>
+    <script src="_content/AntDesign.Charts/ant-design-charts-blazor.js"></script>
+    <script src="dist/frappe-gantt.js"></script>   
+    <script src="js/udx.js"></script>
+    <script src="_framework/blazor.server.js"></script>   
+</body>
+</html>

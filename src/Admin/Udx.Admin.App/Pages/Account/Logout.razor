@@ -1,0 +1,17 @@
+﻿@namespace Udx.Admin.App.Pages.Account
+@layout SiteLayout
+@page "/account/logout"
+@using Microsoft.AspNetCore.Authentication.Cookies
+@using Microsoft.AspNetCore.Http
+@using Udx.App
+ @attribute [ReuseTabsPage(Title="退出登录",Ignore=true)]
+@code 
+{ 
+    protected override async Task OnInitializedAsync()
+    {
+        
+        await ServiceProvider.Get<IdentityUserState>().LogoutAsync();
+        NavigationManager.NavigateTo("/",true);
+    } 
+
+ }

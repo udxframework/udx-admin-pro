@@ -1,0 +1,40 @@
+{
+  /*
+    数据库类型
+    "dbType":["SqlServer", "Oracle", "MySql", "SQLite","MongoDB"]
+  */
+  "AdminDb": {
+    "dbContext": "AdminDb",
+    "dbType": "SqlServer",
+    "connectionString": "Data Source=localhost;Initial Catalog=Dev_Udx_Admin;Persist Security Info=True;User ID=devUdx;Password=devUdx;MultipleActiveResultSets=True",
+    // "connectionString": "server=localhost;port=3306;database=dev_udx_admin;uid=root;pwd=root;Charset=utf8;",
+    //监听所有操作
+    "monitorCommand": true,
+    //监听Curd操作
+    "curd": true,
+    //同步结构
+    "syncStructure": true
+  },
+  "CmsDb": {
+    "dbContext": "CmsDb",
+    "dbType": "SqlServer",
+    "connectionString": "Data Source=localhost;Initial Catalog=Dev_Udx_Cms;Persist Security Info=True;User ID=devUdx;Password=devUdx;MultipleActiveResultSets=True"
+  },
+  "MongoDb": {
+    "dbContext": "MongoDb",
+    "dbType": "MongoDB",
+    "connectionString": "mongodb://127.0.0.1:27017",
+    "databaseName": "dev-udx-mongo"
+  },
+  "EventDb": {
+    "dbContext": "EventDb",
+    "dbType": "SqlServer",
+    "connectionString": "Data Source=localhost;Initial Catalog=Dev_Udx_Admin;Persist Security Info=True;User ID=devUdx;Password=devUdx;MultipleActiveResultSets=True"
+  },
+  "CacheDb": {
+    "/": null,
+    "dbContext": "CacheDb",
+    "dbType": "SqlServer",
+    "connectionString": "Data Source=localhost;Initial Catalog=Dev_Udx_Admin;Persist Security Info=True;User ID=devUdx;Password=devUdx;MultipleActiveResultSets=True"
+  }
+}

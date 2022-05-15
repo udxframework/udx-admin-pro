@@ -1,0 +1,49 @@
+﻿@namespace Udx.Admin.Components
+@inherits UdxComponentBase
+@*<Vditor.Editor @ref="@editor"  Mode="wysiwyg" Toolbar="@Toolbar" @bind-Value="@Value" @bind-Html="@html"  Height="@Height" MinHeight="200" Width="@Width" Upload="@Upload" OnBlur="@OnBlur" />*@
+<div @ref="_ref"></div>
+
+<style  type="text/css">
+    .vditor-toolbar {
+        border: none;
+        padding-left: 12px !important;
+        background-color: #fff;
+    }
+
+    .vditor-reset {
+        padding: 10px 12px !important;
+    }
+
+    .vditor-reset p {
+      margin-bottom: 4px;
+    }
+
+    .vditor {
+        border-color: #22d7bb;
+    }
+
+    .vditor-ir pre.vditor-reset[contenteditable=false] {
+        opacity: 1;
+    }
+    /*修改滚动条样式*/
+    .vditor-ir pre.vditor-reset::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+        /**/
+    }
+
+    .vditor-ir pre.vditor-reset::-webkit-scrollbar-thumb {
+        background: #bfbfbf;
+        border-radius: 10px;
+    }
+
+        .vditor-ir pre.vditor-reset::-webkit-scrollbar-thumb:hover {
+            background: #666;
+        }
+
+        .vditor-toolbar__item .vditor-tooltipped
+        {
+           width:20px;
+           padding:10px 2px;
+        }
+</style>

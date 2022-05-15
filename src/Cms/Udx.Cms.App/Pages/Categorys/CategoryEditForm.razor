@@ -1,0 +1,63 @@
+﻿@namespace Udx.Cms.App.Pages.Categorys
+@inherits  UdxComponentBase 
+ <Modal Title="分类信息"   Visible="@Visible" 
+      OnOk="@HandleOk"
+     OnCancel="@HandleCancel" OkText=@("保存后编辑")   
+       
+     Style="min-width:800px" Draggable=true>   
+       <Form Model="@_EditModel" @ref="_Form"
+           Size="@AntSizeLDSType.Default"
+            OnFinish="OnSaveClick"
+      OnFinishFailed="OnSaveFailed"
+      LabelColSpan="4">
+        <Row Gutter="24">
+              <GridCol Span="12">
+             <FormItem Label="Id"   >
+                <Input @bind-Value="@context.Id" ReadOnly DebounceMilliseconds=1000/>
+            </FormItem>
+             </GridCol><GridCol Span="12"> <FormItem Label="父Id"  Help="关联父节点Id" >
+                <Input @bind-Value="@context.ParentId"  DebounceMilliseconds=1000/>
+            </FormItem></GridCol>
+              <GridCol Span="12">
+            <FormItem Label="名称"  Help="分类的标题" >
+                <Input @bind-Value="@context.Name" AllowClear="true" AutoFocus DebounceMilliseconds=1000/>
+            </FormItem> 
+            </GridCol> 
+            <GridCol Span="12"> </GridCol>
+            <GridCol Span="12">
+            <FormItem Label="分组" LabelColSpan="4"  Help="分类的分组">
+            <Select DataSource="@CmsCategoryGroup.Options"
+		                @bind-Value="@context.Group"
+		                ValueName="@nameof(ConfigOption.Value)"
+		                LabelName="@nameof(ConfigOption.Key)"
+		                DisabledName="@nameof(ConfigOption.Disabled)"
+		                >
+                </Select>
+                 </FormItem> 
+             </GridCol>
+              <GridCol Span="12"> </GridCol>
+              
+              
+              <GridCol Span="12">
+            <FormItem Label="状态" LabelColSpan="4"  Help="禁用后将不显示分类">
+                <SimpleSelect @bind-Value="@context.Status" DefaultValue="禁用" >
+                    <SelectOptions>
+                        <SimpleSelectOption Value="启用" Label="启用"></SimpleSelectOption>
+                        <SimpleSelectOption Value="禁用" Label="禁用"></SimpleSelectOption>
+                    </SelectOptions>
+                </SimpleSelect>
+            </FormItem>  </GridCol>
+             <GridCol Span="12"> </GridCol>
+             
+
+              <GridCol Span="12">
+             <FormItem Label="排序"   LabelColSpan="4">
+               <AntDesign.InputNumber  @bind-Value="@context.Sort" DebounceMilliseconds=1000/>
+            </FormItem>  </GridCol>
+         
+
+              <GridCol Span="24"> <Alert Type="@AlertType.Info" Description="@context.MessageInfo"/> </GridCol>
+           
+            </Row>
+               </Form>
+</Modal>

@@ -1,0 +1,22 @@
+﻿@namespace Udx.Cms.App.Shared
+@inherits LayoutComponentBase
+<Layout Class="site-layout">
+<Header Style="max-width:100vw;background: #fff;margin: 0px;padding: 0px 3px 0px 1px;">        
+ <UdxHeader/>
+</Header>
+<Layout Class="site-bgcolor" Style="min-height:90vh">
+<Sider Theme="SiderTheme.Light" > 
+  
+<div Style="overflow:auto;background-color:#fff;height:100%;width:100%;margin-top:15px;">
+    <Affix OffsetTop="0">  
+<CmsCategoryTreeList/> 
+
+</Affix>
+</div>
+</Sider>   
+<Content Class="site-bgcolor">
+    @Body
+</Content>   
+</Layout>
+<UdxFooter/>
+</Layout> 

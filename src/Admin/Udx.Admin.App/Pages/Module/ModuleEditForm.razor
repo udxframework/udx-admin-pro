@@ -1,0 +1,91 @@
+﻿@namespace Udx.Admin.App.Pages.Modules
+@inherits  UdxComponentBase 
+ <Modal Title="模块信息"   Visible="@Visible" 
+      OnOk="@HandleOk"
+     OnCancel="@HandleCancel" OkText=@("保存")   
+       
+     Style="min-width:800px" Draggable=true>   
+      
+      <Form Model="@_EditModel" @ref="@_Form"
+      OnFinish="OnSaveClick"
+      OnFinishFailed="OnSaveFailed"
+      Size="@AntSizeLDSType.Default"
+      LabelColSpan="4"
+      >  
+      <Spin Spinning=_loading> 
+        <Row Gutter="24">
+           
+          
+              <GridCol Span="12">
+             <FormItem Label="Id"   >
+                <Input @bind-Value="@context.Id" ReadOnl DebounceMilliseconds=1000/>
+            </FormItem>
+             </GridCol><GridCol Span="12"> <FormItem Label="父Id"   >
+                <Input @bind-Value="@context.ParentId" AllowClear="true" DebounceMilliseconds=1000/>
+            </FormItem></GridCol>
+              <GridCol Span="12">
+            <FormItem Label="模块名称"  Help="模块的菜单标题" >
+                <Input @bind-Value="@context.Name" AllowClear="true" AutoFocus DebounceMilliseconds=1000/>
+            </FormItem> 
+            </GridCol> 
+            <GridCol Span="12">
+            <FormItem Label="系统模块"   Help="路由所属系统模块分类">
+            <Select DataSource="@ModuleType.Options"
+		                @bind-Value="@context.ModuleType"
+		                ValueName="@nameof(ConfigOption.Value)"
+		                LabelName="@nameof(ConfigOption.Key)"
+		                DisabledName="@nameof(ConfigOption.Disabled)"
+		                >
+                </Select>
+                 </FormItem> 
+             </GridCol>
+
+              <GridCol Span="12">
+             <FormItem Label="模块Key"  Help="请设置在模块里面是唯一值。" >
+                <Input @bind-Value="@context.Key" AllowClear="true" DebounceMilliseconds=1000/>
+            </FormItem>  </GridCol>
+             
+                  <GridCol Span="12">
+             <FormItem Label="图标Icon"   Help="菜单的图标,设置iconfont语义图标。" >
+                <Input @bind-Value="@context.Icon"  AllowClear="true" placeholder="crown" DebounceMilliseconds=1000/>
+            </FormItem>  </GridCol>
+            
+             <GridCol Span="24">
+             <FormItem Label="路由Path"  LabelColSpan="2" >
+                <Input @bind-Value="@context.Path" AllowClear="true" DebounceMilliseconds=1000/>
+            </FormItem>  </GridCol>
+              <GridCol Span="24">
+            <FormItem Label="模块Actions"   LabelColSpan="2" Help="每个action用“|”分割,例如:“新增|保存|删除”">
+                <Input @bind-Value="@context.Actions"  AllowClear="true" placeholder="新增|保存|删除" DebounceMilliseconds=1000/>
+            </FormItem> 
+             </GridCol>
+              
+              <GridCol Span="12">
+            <FormItem Label="状态"  Help="禁用不显示在菜单和无模块权限">
+                <SimpleSelect @bind-Value="@context.Status" DefaultValue="禁用" >
+                    <SelectOptions>
+                        <SimpleSelectOption Value="启用" Label="启用"></SimpleSelectOption>
+                        <SimpleSelectOption Value="禁用" Label="禁用"></SimpleSelectOption>
+                    </SelectOptions>
+                </SimpleSelect>
+            </FormItem>  </GridCol>
+
+              <GridCol Span="12">
+            <FormItem Label="隐藏" Help="隐藏后不显示在菜单里">
+                <Checkbox @bind-Value="context.HideInMenu" />
+            </FormItem>  </GridCol>
+
+              <GridCol Span="12">
+             <FormItem Label="排序"   Help="菜单显示从小到大排序">
+               <AntDesign.InputNumber  @bind-Value="@context.Sort" DebounceMilliseconds=1000/>
+            </FormItem>  </GridCol>
+            <GridCol Span="12"></GridCol>
+              <GridCol Span="24">
+            <FormItem Label="备注"   LabelColSpan="2" >
+                <TextArea @bind-Value="@context.Description" AllowClear="true"/>
+            </FormItem> </GridCol>
+              <GridCol Span="24"> <Alert Type="@AlertType.Info" Description="@context.MessageInfo"/> </GridCol>
+            </Row>
+            </Spin>
+          </Form>
+</Modal>

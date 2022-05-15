@@ -1,0 +1,57 @@
+﻿@namespace Udx.Admin.App.Pages.Roles
+@page "/admin/roles-edit/{Id}/{Title}"
+@inherits  UdxComponentBase
+<Form Model="@_EditModel"
+      OnFinish="OnFinish"
+      OnFinishFailed="OnFinishFailed"
+      Size="@AntSizeLDSType.Default"
+      LabelColSpan="2"
+      WrapperColSpan="6"
+      >
+
+    <PageHeader Class="site-page-header">
+        <!--title-->
+        <PageHeaderTitle>角色管理</PageHeaderTitle>
+        <!--subtitle-->
+        <PageHeaderSubtitle>@Title</PageHeaderSubtitle>
+        <!--extra-->
+        <PageHeaderExtra>
+            <div class="udx-page-header-extra-fixed">
+            <Button Icon="plus"  Disabled='!RuleHelper.GetAction("新增")' OnClick="OnAddClick">新增</Button>
+            <Button Icon="save" Disabled='!RuleHelper.GetAction("保存")' HtmlType="submit" Type="primary">保存</Button>
+            <Button Icon="back" OnClick="OnBack">返回</Button>
+            </div>
+        </PageHeaderExtra>
+      <PageHeaderContent >         
+      
+      
+            <FormItem Label="角色名称"  >
+                <Input @bind-Value="@context.RoleName" AllowClear="true" DebounceMilliseconds=1000/>
+            </FormItem> 
+            
+            <FormItem Label="状态">
+                <SimpleSelect @bind-Value="@context.Status" DefaultValue="禁用" >
+                    <SelectOptions>
+                        <SimpleSelectOption Value="启用" Label="启用"></SimpleSelectOption>
+                        <SimpleSelectOption Value="禁用" Label="禁用"></SimpleSelectOption>
+                    </SelectOptions>
+                </SimpleSelect>
+            </FormItem> 
+             <FormItem Label="模块" Help="角色所属系统模块分类">              
+                <Select DataSource="@ModuleType.Options" 
+		                @bind-Value="@context.ModuleType"
+		                ValueName="@nameof(ConfigOption.Value)"
+		                LabelName="@nameof(ConfigOption.Value)"
+		                DisabledName="@nameof(ConfigOption.Disabled)"
+		                >
+                </Select>
+            </FormItem> 
+            <FormItem Label="备注"  WrapperColSpan="12" >
+                <TextArea @bind-Value="@context.Description" AllowClear="true"/>
+            </FormItem>
+            <br />
+             </PageHeaderContent>
+        </PageHeader>
+        
+</Form>
+  

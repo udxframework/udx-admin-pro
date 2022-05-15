@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>..\..\Udx\Udx.Server\XmlComments\Udx.Cms.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Udx\Udx.Dbs\Udx.Dbs.csproj" />
+    <ProjectReference Include="..\Udx.Cms.Shared\Udx.Cms.Shared.csproj" />
+  </ItemGroup>
+</Project>

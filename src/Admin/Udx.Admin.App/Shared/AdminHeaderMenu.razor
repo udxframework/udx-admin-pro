@@ -1,0 +1,9 @@
+﻿@namespace Udx.Admin.App.Shared
+<Menu Mode="@(IsMobile?MenuMode.Inline: MenuMode.Horizontal)" Style="border-bottom: 0px solid #f0f0f0" >
+    @foreach (var item in _menuItems.OrderBy(x => x.Order))
+    {
+        <MenuItem  Key="@item.Url" RouterLink="@item.Url" RouterMatch="NavLinkMatch.Prefix">
+            <span>@item.Title</span>
+        </MenuItem>
+    }
+</Menu>

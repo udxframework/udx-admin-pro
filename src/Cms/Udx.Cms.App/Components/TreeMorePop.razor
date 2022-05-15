@@ -1,0 +1,80 @@
+﻿@typeparam TItem
+
+
+<Popover ContentTemplate="_content">
+    <span class="hoverDisplay">
+        <Icon Type="more"></Icon>
+    </span>
+</Popover>
+
+
+@code {
+    RenderFragment _content =>
+    @<div>
+        <Space Direction="DirectionVHType.Vertical" Style="width:100px">
+            <SpaceItem>
+                <Button Icon="plus" Style="border-width:0px" @onclick="OnAddClick">新建</Button>
+            </SpaceItem>
+            <SpaceItem>
+                <Button Icon="edit" Style="border-width:0px" @onclick="OnEditClick">编辑</Button>
+            </SpaceItem>
+            <SpaceItem>
+                <Button Icon="delete" Style="border-width:0px" @onclick="OnDeleteClick">删除</Button>
+            </SpaceItem>
+        </Space>
+    </div>;
+
+    [Parameter]
+    public Tree<TItem> Tree { get; set; }
+
+    [Parameter]
+    public TreeNode<TItem> Node { get; set; }
+
+
+    [Parameter]
+    public EventCallback<TreeEventArgs<TItem>> OnAdd { get; set; }
+
+    [Parameter]
+    public EventCallback<TreeEventArgs<TItem>> OnEdit { get; set; }
+
+    [Parameter]
+    public EventCallback<TreeEventArgs<TItem>> OnDelete { get; set; }
+
+    private async Task OnAddClick(MouseEventArgs args)
+    {
+        await OnAdd.InvokeAsync(new TreeEventArgs<TItem>(Tree, Node, args));
+
+    }
+
+    private async Task OnEditClick(MouseEventArgs args)
+    {
+        await OnEdit.InvokeAsync(new TreeEventArgs<TItem>(Tree, Node, args));
+
+    }
+
+    private async Task OnDeleteClick(MouseEventArgs args)
+    {
+        await OnDelete.InvokeAsync(new TreeEventArgs<TItem>(Tree, Node, args));
+
+    }
+
+
+}
+
+
+<style>
+
+    .ant-tree .ant-tree-node-content-wrapper:hover .hoverDisplay {
+        background-color: #f5f5f5;
+        display: inline;
+    }
+
+    .ant-tree .ant-tree-node-content-wrapper:hover .hoverDisplay:hover {
+        color: #1890ff;
+        /*background-color: aquamarine*/
+    }
+
+    .hoverDisplay {
+        display: none;
+    }
+</style>

@@ -1,0 +1,11 @@
+﻿@namespace  Udx.Admin.App.Components
+@using  Udx.Admin.App.Models;
+@inherits UdxFeedbackComponent<RoleDialogModel, List<RoleUserModel>>
+<Table   
+           DataSource="@Datas"  Size="@TableSize.Small"   Title="@Options.Name"  DefaultExpandAllRows="@true" ScrollY="600px" PageSize="99999"
+           @bind-SelectedRows="selectedRows" HidePagination="@true">
+        <Selection Key="@(context.Id)" Type="checkbox" />
+        <Column @bind-Field="@context.RoleName" Title="角色名称" Width="200" FilterMultiple />
+           <Column @bind-Field="@context.ModuleType" Title="系统模块" Width="200" FilterMultiple />
+        <Column Title="描述" Ellipsis  @bind-Field="context.Description" /> 
+</Table>

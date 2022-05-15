@@ -1,0 +1,64 @@
+﻿@namespace Udx.Admin.App.Pages.Tenants
+@inherits  UdxComponentBase
+@page "/admin/tenants-edit"
+<Form Model="@_EditModel"
+      OnFinish="OnFinish"
+      OnFinishFailed="OnFinishFailed"
+      Size="@AntSizeLDSType.Default"
+      LabelColSpan="2"
+      WrapperColSpan="6"
+      >
+
+    <PageHeader Class="site-page-header">
+        <!--title-->
+        <PageHeaderTitle>租户管理</PageHeaderTitle>
+        <!--subtitle-->
+        <PageHeaderSubtitle>新增</PageHeaderSubtitle>
+        <!--extra-->
+        <PageHeaderExtra>
+            
+            <div class="udx-page-header-extra-fixed">
+            <Button Icon="plus" Disabled="@Add" OnClick="OnAddClick">新增</Button>
+            <Button Icon="save" HtmlType="submit" Type="primary">保存</Button>
+            <Button Icon="back" OnClick="OnBack">返回</Button>
+            </div>
+        </PageHeaderExtra>
+      <PageHeaderContent >         
+       
+           <FormItem Label="Id"  >
+                <Input @bind-Value="@context.Id" Disabled DebounceMilliseconds=1000/>
+            </FormItem>
+            <FormItem Label="编码"  >
+                <Input @bind-Value="@context.Code" ReadOnly DebounceMilliseconds=1000/>
+            </FormItem>
+           <FormItem Label="名称" >
+                <Input @bind-Value="@context.Name" AllowClear="true" DebounceMilliseconds=1000/>
+            </FormItem> 
+           @* <FormItem Label="启用" >
+                <Checkbox @bind-Checked="@context.Enabled" CheckedChildren="是" UnCheckedChildren="否"/>
+            </FormItem> *@
+          
+            <FormItem Label="数据库" Help="默认使用系统数据库" >
+                <SimpleSelect @bind-Value="@context.DbType" DefaultValue="系统" >
+                    <SelectOptions>
+                        <SimpleSelectOption Value="" Label="系统"></SimpleSelectOption>
+                        <SimpleSelectOption Value="SqlServer" Label="SqlServer"></SimpleSelectOption>
+                        <SimpleSelectOption Value="MySql" Label="MySql"></SimpleSelectOption>
+                    </SelectOptions>
+                </SimpleSelect>
+            </FormItem> 
+             <FormItem Label="链接字符串" WrapperColSpan="12">
+                <TextArea @bind-Value="@context.ConnectionString" AllowClear="true" DebounceMilliseconds=1000/>
+            </FormItem> 
+            <FormItem Label="排序" >
+                <AntDesign.InputNumber  @bind-Value="@context.Sort"  />
+
+            </FormItem> 
+            <FormItem Label="备注"  WrapperColSpan="12" >
+                <TextArea @bind-Value="@context.Description" AllowClear="true" MinRows="5"/>
+            </FormItem>
+            <br /> </PageHeaderContent>
+        </PageHeader>
+        
+</Form>
+  

@@ -1,0 +1,14 @@
+﻿@namespace Udx.Admin.Components
+@inherits  UdxComponentBase
+<ErrorBoundary>
+  <Select Mode="@Mode" Style="@Style" Disabled=@Disabled
+                                DataSource="@configOption?.Options" 
+		                        @bind-Value="@Value"
+		                        ValueName="@nameof(ConfigOption.Value)"
+		                        LabelName="@nameof(ConfigOption.Key)"
+		                        DisabledName="@nameof(ConfigOption.Disabled)"
+								OnSelectedItemChanged="OnSelected"
+								OnSelectedItemsChanged="OnSelectedItemsChangedHandler"
+		                     AllowClear="true"/>
+							 
+</ErrorBoundary>

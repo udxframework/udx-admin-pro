@@ -1,0 +1,85 @@
+﻿@namespace Udx.Admin.App.Pages.Users
+@page "/admin/users-edit/{Id}/{Title}"
+@inherits UdxComponentBase
+<PageTitle>@Title</PageTitle>
+<Form Model="@_EditModel"
+      OnFinish="OnFinish"
+      OnFinishFailed="OnFinishFailed"
+      Size="@AntSizeLDSType.Default"
+      LabelColSpan="2"
+      WrapperColSpan="6"
+      >
+
+    <PageHeader Class="site-page-header">
+        <!--title-->
+        <PageHeaderTitle>用户管理</PageHeaderTitle>
+        <!--subtitle-->
+        <PageHeaderSubtitle>新增</PageHeaderSubtitle>
+        <!--extra-->
+        <PageHeaderExtra>
+            
+            <div class="udx-page-header-extra-fixed">
+            <Button Icon="plus" Disabled='!RuleHelper.GetAction("新增")' OnClick="OnAddClick">新增</Button>
+            <Button Icon="save" Disabled='!RuleHelper.GetAction("保存")' HtmlType="submit" Type="primary">保存</Button>
+            <Button Icon="back" OnClick="OnBack">返回</Button>
+            </div>
+        </PageHeaderExtra>
+      <PageHeaderContent >         
+       <Alert Type="@AlertType.Info"
+          Description="@context.MessageInfo"
+          Closable />
+       </PageHeaderContent>
+      <PageHeaderFooter>
+           <FormItem Label="头像"  Help="点击选择上传封面图片，建议宽高比例128*128px，大小500K以内">
+                <UdxUploadImg @bind-Value="@context.Avatar" MaxSize="500" Style="width:128px;height:128px;" ReadOnly='!RuleHelper.GetAction("新增")&&!RuleHelper.GetAction("保存")'/>
+            </FormItem>
+            <FormItem Label="账号"  >
+                <Input @bind-Value="@context.UserName" DebounceMilliseconds=1000/>
+            </FormItem>
+           <FormItem Label="姓名" >
+                <Input @bind-Value="@context.Name"  DebounceMilliseconds=1000/>
+            </FormItem> 
+            <FormItem Label="昵称" >
+                <Input @bind-Value="@context.NickName"  DebounceMilliseconds=1000/>
+            </FormItem> 
+              <FormItem Label="Email">
+        <AntDesign.Input @bind-Value="@context.Email" DebounceMilliseconds=1000 Style="max-width: 220px;"/>
+    </FormItem>
+
+   <FormItem Label="手机号">
+        <Input @bind-Value="@context.Phone"  MaxLength="20" Style="max-width: 220px;" DebounceMilliseconds=1000/>
+    </FormItem>
+            <FormItem Label="状态" >
+                <SimpleSelect @bind-Value="@context.Status" DefaultValue="禁用" >
+                    <SelectOptions>
+                        <SimpleSelectOption Value="启用" Label="启用"></SimpleSelectOption>
+                        <SimpleSelectOption Value="禁用" Label="禁用"></SimpleSelectOption>
+                    </SelectOptions>
+                </SimpleSelect>
+            </FormItem> 
+            <FormItem Label="数据权限"  >
+                 <SimpleSelect @bind-Value="@context.IsAdmin" DefaultValue="否" >
+                    <SelectOptions>
+                        <SimpleSelectOption Value="是" Label="超级权限"></SimpleSelectOption>
+                        <SimpleSelectOption Value="否" Label="否"></SimpleSelectOption>
+                    </SelectOptions>
+                </SimpleSelect>
+            </FormItem>
+             @if (_SaveModel.Operater == SaveOperater.Add)
+            {
+                <FormItem Label="密码" Help="新增时不设置为空密码默认为{账号123456}！">
+                    <Input @bind-Value="@context.Password" AllowClear="true" DebounceMilliseconds=1000/>
+                </FormItem> 
+            }
+            <FormItem Label="默认租户" Help="用户的默认租户Id" >
+                <Input @bind-Value="@context.TenantId" AllowClear="true" Disabled  DebounceMilliseconds=1000/>
+            </FormItem> 
+            <FormItem Label="备注"  WrapperColSpan="12" >
+                <TextArea @bind-Value="@context.Description" AllowClear="true"/>
+            </FormItem>
+            <br />
+              </PageHeaderFooter>
+        </PageHeader>
+        
+</Form>
+  

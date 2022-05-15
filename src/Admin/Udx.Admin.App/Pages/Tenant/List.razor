@@ -1,0 +1,65 @@
+﻿@namespace Udx.Admin.App.Pages.Tenants
+@using  Udx.Admin.Models
+@using  Udx.Models
+
+@inherits  UdxComponentBase
+@page "/admin/tenants-list"
+             <ErrorBoundary> 
+            <div class="udx-tabs-inner-container">
+    <PageHeader Class="site-page-header">           
+        <!--title-->
+        <PageHeaderTitle></PageHeaderTitle>
+        <!--subtitle-->
+        <PageHeaderSubtitle></PageHeaderSubtitle>
+        <!--extra-->
+        <PageHeaderExtra>
+            <Button Icon="@_SearchModel.FoldIcon" OnClick="@_SearchModel.Change">查询</Button>
+              @if (RuleHelper.GetAction("新增")){<Button Icon="plus" OnClick="OnAddClick">新增</Button> }
+          @if (RuleHelper.GetAction("编辑")){<Button Icon="edit" OnClick="OnEditClick">编辑</Button>}
+          @if (RuleHelper.GetAction("删除"))
+         {
+            <Popconfirm Title="确定要删除吗?"
+                        OnConfirm="()=> OnDeleteClick()"
+                        OkText="确定"
+                        
+                        CancelText="取消">               
+                <Button Icon="delete" Danger>删除</Button>
+            </Popconfirm>
+         }
+            </PageHeaderExtra>
+
+        <!--content-->
+        
+             <PageHeaderContent>
+                  <UdxSearch FetchModel="@_SearchModel"></UdxSearch>
+            </PageHeaderContent>
+    </PageHeader>
+     <Table 
+     @ref="table"
+           TItem="TenantListOutput"
+           DataSource="@_QueryResponse.Data"
+              OnRowClick="OnRowClick"
+            Size=@TableSize.Middle
+           @bind-PageSize="_SearchModel.PageSize" HidePagination Bordered       >
+        <Selection Key="@context.Id" Type="radio" Width="40px" Fixed="left" />
+        <Column Title="ID" @bind-Field="context.Id" Hidden="true"  Width="100px"/>
+            
+        <Column Title="编码" @bind-Field="context.Code" Filterable  Fixed="Left" Width="150px"/>
+         <Column Title="名称" @bind-Field="context.Name" Width="200px"/>
+        <Column Title="启用" @bind-Field="context.Enabled" >
+            <Switch @bind-Checked="@context.Enabled" CheckedChildren="是" UnCheckedChildren="否" Disabled="true"/>
+        </Column>
+        <Column Title="数据库类型" @bind-Field="context.DbType" Sortable Filterable  Width="150px"/>
+         <Column Title="描述" Ellipsis  @bind-Field="context.Description" /> 
+
+         <Column Title="创建人" @bind-Field="context.CreatedUserName"    Sortable Width="120px"/>
+        <Column Title="创建时间" @bind-Field="context.CreatedTime" Format="yyyy-MM-dd" Sortable Width="100px"/>
+        <Column Title="修改时间" @bind-Field="context.ModifiedTime" Format="yyyy-MM-dd" Sortable Width="100px"/>
+       
+
+         
+   </Table>
+   <UdxPager Model="@_SearchModel"></UdxPager>
+   </div>
+     </ErrorBoundary> 
+       
