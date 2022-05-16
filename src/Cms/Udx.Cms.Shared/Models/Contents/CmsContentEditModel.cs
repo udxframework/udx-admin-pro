@@ -19,9 +19,14 @@ public class CmsContentEditModel : Udx.Dbs.Entities.CmsContentEntity
     public override string CategoryId { get; set; }
     public string CategoryTitle { get; set; }
     public IEnumerable<string> CategoryIds {
-       get{ IEnumerable<string> result = new List<string> { CategoryId };
-        return result;
+       get{
+            if (string.IsNullOrEmpty(CategoryId))
+            {
+                return new List<string>();
+            }
+            return new List<string> { CategoryId };
         }
+        set { CategoryId = string.Join(",",value); }
     }
     /// <summary>
     /// 内容

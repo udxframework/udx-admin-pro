@@ -1,3 +1,5 @@
+/.vs
+/src/.vs
 /src/Udx/Udx.Server/bin
 /src/Udx/Udx.Server/logs
 /src/Udx/Udx.Server/obj
@@ -22,7 +24,6 @@
 /src/Cms/Udx.Cms.App/bin
 /src/Cms/Udx.Cms.Shared/bin
 /src/Cms/Udx.Cms.Shared/obj
-/src/Udx/Udx.Dbs.Shared/Logs
 /src/Udx/Udx.Dbs.Shared/obj
 /src/Udx/Udx.Dbs.Shared/bin
 /src/Udx/Udx.Dbs/obj
